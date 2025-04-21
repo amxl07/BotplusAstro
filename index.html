@@ -49,6 +49,7 @@
       </a>
 
       <nav id="navmenu" class="navmenu">
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
           <li><a href="#quick-pitch" class="active">Highlights</a></li>
@@ -56,7 +57,6 @@
           <li><a href="#omnichannel-communication">Integrations</a></li>
           <li><a href="#call-to-action" class="active">Book Demo</a></li>
         </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
     </div>
@@ -64,7 +64,7 @@
 
   <main class="main">
 
-        <!-- Modified Hero Section -->
+    <!-- Modified Hero Section -->
     <section id="hero" class="hero section">
       <img src="assets/img/logo.svg" alt="" data-aos="fade-in" class="">
       
@@ -73,14 +73,14 @@
           <!-- Text Content Column -->
           <div class="col-xl-6 col-lg-7 text-left">
             <h1>Your Digital Brand Ambassador</h1>
-            <p><i>AI So Real, Customers Ask ‘Are You Human?’</i></p><br>
+            <p><i>AI So Real, Customers Ask ‘Are You Human?’</i></p>
             <p>Photorealistic 3D AI avatars that understand emotions, Speak 40+ Languages, and Resolve Issues Like a Human</p>
-            <div class="text-left" data-aos="zoom-out" data-aos-delay="100">
+            <div class="text-center" data-aos="zoom-out" data-aos-delay="100">
               <a href="javascript:void(0);" 
                 onclick="Calendly.initPopupWidget({
                   url: 'https://calendly.com/justin-manj/30min?&hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=364f5d&back=1'
                 }); return false;" 
-                class="btn-get-started">
+                class="btn-common btn-common--transparent btn-get-started">
                 Book a Demo
               </a>
             </div>
@@ -264,8 +264,9 @@
     <div class="row justify-content-center">
       <div class="col-xl-8 col-lg-10">
         <div class="ratio ratio-16x9 position-relative video-container">
-          <video id="featureVideo" class="feature-video" playsinline>
+          <video id="featureVideo" class="feature-video" playsinline webkit-playsinline>
             <source src="assets/video/botplus-campaign.mp4" type="video/mp4">
+            <source src="assets/video/botplus-campaign.webm" type="video/webm">
             Your browser does not support the video tag.
           </video>
           <button id="videoPlayBtn" class="pulsating-play-btn" aria-label="Play video"></button>
@@ -372,6 +373,7 @@
         <div class="ratio ratio-16x9 position-relative video-container">
           <video id="demoVideo" class="feature-video" playsinline>
             <source src="assets/video/botplus-demo.mp4" type="video/mp4">
+            <source src="assets/video/botplus-demo.webm" type="video/webm">
             Your browser does not support the video tag.
           </video>
           <button id="demoPlayBtn" class="pulsating-play-btn" aria-label="Play video"></button>
@@ -423,7 +425,7 @@
 </section>
 
 <!-- Call To Action Section -->
-<section id="call-to-action" class="call-to-action section accent-background">
+<section id="call-to-action" class="call-to-action section bg-light">
   <div class="container">
     <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
       <div class="col-xl-10">
@@ -435,7 +437,7 @@
               onclick="Calendly.initPopupWidget({
                 url: 'https://calendly.com/justin-manj/30min?&hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=364f5d&back=1'
               }); return false;" 
-              class="btn-get-started">
+              class="btn-common btn-common--transparent btn-get-started">
               Book a Demo
             </a>
           </div>
@@ -605,6 +607,7 @@
 
       observer.observe(demoVideo);
     });
+    
   </script>
 
   <!-- Add this script in your footer or before closing </body> -->

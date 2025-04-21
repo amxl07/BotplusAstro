@@ -242,6 +242,7 @@ h6 {
   .navmenu .active,
   .navmenu .active:focus {
     color: var(--nav-hover-color);
+    background-color: var(--color-5);
   }
 
   .navmenu .dropdown ul {
@@ -301,132 +302,71 @@ h6 {
   }
 }
 
-/* Navmenu - Mobile */
 @media (max-width: 1199px) {
-  .mobile-nav-toggle {
-    color: var(--nav-color);
-    font-size: 28px;
-    line-height: 0;
-    margin-right: 10px;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-
   .navmenu {
-    padding: 0;
-    z-index: 9997;
+    position: relative;
+    z-index: 9999;
   }
 
   .navmenu ul {
     display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--surface-color);
+    border-radius: 8px;
+    padding: 10px 0; /* Reduced container padding */
+    margin: 8px 0;
+    min-width: 220px; /* Slightly wider for better touch targets */
+    box-shadow: 0 8px 24px rgba(54, 79, 93, 0.15);
     list-style: none;
-    position: absolute;
-    inset: 60px 20px 20px 20px;
-    padding: 10px 0;
-    margin: 0;
-    border-radius: 6px;
-    background-color: var(--nav-mobile-background-color);
-    overflow-y: auto;
-    transition: 0.3s;
     z-index: 9998;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
   }
 
-  .navmenu a,
-  .navmenu a:focus {
-    color: var(--nav-dropdown-color);
-    padding: 10px 20px;
-    font-family: var(--nav-font);
-    font-size: 17px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    white-space: nowrap;
-    transition: 0.3s;
+  .navmenu li {
+    padding: 8px 20px; /* Added padding for list items */
   }
 
-  .navmenu a i,
-  .navmenu a:focus i {
-    font-size: 12px;
-    line-height: 0;
-    margin-left: 5px;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: 0.3s;
-    background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
-  }
-
-  .navmenu a i:hover,
-  .navmenu a:focus i:hover {
-    background-color: var(--accent-color);
-    color: var(--contrast-color);
-  }
-
-  .navmenu a:hover,
-  .navmenu .active,
-  .navmenu .active:focus {
-    color: var(--nav-dropdown-hover-color);
-  }
-
-  .navmenu .active i,
-  .navmenu .active:focus i {
-    background-color: var(--accent-color);
-    color: var(--contrast-color);
-    transform: rotate(180deg);
-  }
-
-  .navmenu .dropdown ul {
-    position: static;
-    display: none;
-    z-index: 99;
-    padding: 10px 0;
-    margin: 10px 20px;
-    background-color: var(--nav-dropdown-background-color);
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-    box-shadow: none;
-    transition: all 0.5s ease-in-out;
-  }
-
-  .navmenu .dropdown ul ul {
-    background-color: rgba(33, 37, 41, 0.1);
-  }
-
-  .navmenu .dropdown>.dropdown-active {
+  .navmenu a {
+    padding: 12px 0 !important; /* Vertical padding for links */
+    font-size: 17px !important; /* Slightly larger text */
+    color: var(--nav-color);
     display: block;
-    background-color: rgba(33, 37, 41, 0.03);
+    transition: 0.3s;
   }
 
-  .mobile-nav-active {
-    overflow: hidden;
+  .navmenu li:hover,
+  .navmenu li.active {
+    color: var(--nav-hover-color);
+    background: var(--color-5); /* Subtle hover background */
   }
 
-  .mobile-nav-active .mobile-nav-toggle {
-    color: #fff;
-    position: absolute;
-    font-size: 32px;
-    top: 15px;
-    right: 15px;
-    margin-right: 0;
+  .mobile-nav-active .navmenu ul {
+    display: block;
+  }
+
+  /* Add separation between menu items */
+  .navmenu li:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+    position: relative;
     z-index: 9999;
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    font-size: 28px;
+    cursor: pointer;
+    padding: 15px; /* Larger tap target for toggle */
   }
 
   .mobile-nav-active .navmenu {
-    position: fixed;
-    overflow: hidden;
-    inset: 0;
-    background: rgba(33, 37, 41, 0.8);
-    transition: 0.3s;
-  }
-
-  .mobile-nav-active .navmenu>ul {
-    display: block;
+    position: static;
   }
 }
+
 
 /*--------------------------------------------------------------
 # Global Footer
@@ -717,6 +657,32 @@ section,
   margin-bottom: 0;
 }
 
+
+
+/* Updated Button Styles */
+.btn-common {
+  border: 2px solid var(--accent-color);
+  border-radius: 25px;
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-common--transparent {
+  background: color-mix(in srgb, var(--surface-color), transparent 20%);
+  color: var(--accent-color);
+}
+
+.btn-common--transparent:hover {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -767,21 +733,17 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
-.hero .btn-get-started {
-  color: var(--contrast-color);
-  background: var(--color-2);
-  font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-  padding: 14px 50px;
-  border-radius: 5px;
-  transition: 0.5s;
-  margin-top: 30px;
-  display: inline-block;
+.hero p1 {
+  margin: 10px 0 0 0;
+  font-size: 20px;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
-.hero .btn-get-started:hover {
-  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+/* Updated Book a Demo Button */
+.hero .btn-get-started {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
 }
 
 /* Video Section */
@@ -789,7 +751,7 @@ section,
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem; /* Default gap for all screens */
+  gap: 1rem; /* Default gap for all screens */
 }
 
 .hero-video {
@@ -816,6 +778,7 @@ section,
   gap: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
+  margin-top: 15px;
 }
 
 .unmute-btn:hover {
@@ -1504,18 +1467,10 @@ section,
   opacity: 0.9;
 }
 
-/* Reuse existing button styles from hero */
 .call-to-action .btn-get-started {
-  color: var(--contrast-color);
-  background: var(--color-2);
   font-weight: 600;
-  font-size: 16px;
   letter-spacing: 0.5px;
-  display: inline-block;
-  padding: 14px 50px;
-  border-radius: 5px;
-  transition: 0.5s;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 /*--------------------------------------------------------------
