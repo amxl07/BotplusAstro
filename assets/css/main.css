@@ -689,7 +689,7 @@ section,
 .hero {
   width: 100%;
   min-height: 70vh;
-  padding: 0 0 40px 0 !important;
+  padding: 0 0 40px 0;
   position: relative;
   display: flex;
   align-items: center;
