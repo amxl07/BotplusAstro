@@ -90,19 +90,19 @@
           <!-- Video Column -->
           <div class="col-xl-6 col-lg-5">
             <div class="ratio ratio-16x9">
-              <video id="heroVideo" autoplay muted loop playsinline class="hero-video">
+              <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline class="hero-video">
                 <source src="assets/video/intro-scirpt.mp4" type="video/mp4">
+                <source src="assets/video/intro-scirpt.webm" type="video/webm"> <!-- Fallback format -->
                 Your browser does not support the video tag.
               </video>
             </div>
-            <div class="video-controls text-center">
+            <div class="video-controls mt-2 text-center">
               <button id="unmuteBtn" class="unmute-btn" aria-label="Unmute video">
                 <span class="btn-text">Unmute to hear your agent speak</span>
               </button>
             </div>
           </div>
         </div>
-        
         
       </div>
     </section><!-- /Hero Section -->
@@ -257,6 +257,24 @@
   </div>
 </section>
 
+
+<!-- Video Section -->
+<section id="product-video" class="video-section section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-8 col-lg-10">
+        <div class="ratio ratio-16x9 position-relative video-container">
+          <video id="featureVideo" class="feature-video" playsinline>
+            <source src="assets/video/botplus-campaign.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <button id="videoPlayBtn" class="pulsating-play-btn" aria-label="Play video"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- /Video Section -->
+
 <!-- Immersive Experience Section -->
 <section id="immersive-experience" class="features section">
   <div class="container">
@@ -344,6 +362,24 @@
     </div>
   </div>
 </section>
+
+
+<!-- Video Section -->
+<section id="product-video" class="video-section section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-8 col-lg-10">
+        <div class="ratio ratio-16x9 position-relative video-container">
+          <video id="demoVideo" class="feature-video" playsinline>
+            <source src="assets/video/botplus-demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <button id="demoPlayBtn" class="pulsating-play-btn" aria-label="Play video"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- /Video Section -->
 
 <!-- Smart Agent Handover Section -->
 <section id="smart-handover" class="features section">
@@ -447,8 +483,7 @@
           <p>BotPlus Technologies</p>
           <p>DIFC</p>
           <p>Dubai, UAE</p>
-          <p class="mt-4"><strong>Phone:</strong> <span>+971 50 150-3004</span></p>
-          <p><strong>Email:</strong> <span>sales@botplus.ae</span></p>
+          <p class="mt-4"><strong>Phone:</strong> <span>+971 50 150 3004</span></p>
         </div>
     
       </div>
@@ -499,6 +534,76 @@
           unmuteBtn.style.display = 'block';
         });
       }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const featureVideo = document.getElementById('featureVideo');
+      const videoPlayBtn = document.getElementById('videoPlayBtn');
+
+      // Play/Pause toggle
+      videoPlayBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        featureVideo.play();
+        videoPlayBtn.classList.add('hidden');
+      });
+
+      // Video click to pause
+      featureVideo.addEventListener('click', () => {
+        featureVideo.pause();
+        videoPlayBtn.classList.remove('hidden');
+      });
+
+      // Show button when video ends
+      featureVideo.addEventListener('ended', () => {
+        videoPlayBtn.classList.remove('hidden');
+      });
+
+      // Optional: Pause when scrolled out of view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting && !featureVideo.paused) {
+            featureVideo.pause();
+            videoPlayBtn.classList.remove('hidden');
+          }
+        });
+      }, { threshold: 0.5 });
+
+      observer.observe(featureVideo);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const demoVideo = document.getElementById('demoVideo');
+      const demoPlayBtn = document.getElementById('demoPlayBtn');
+
+      // Play/Pause toggle
+      demoPlayBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        demoVideo.play();
+        demoPlayBtn.classList.add('hidden');
+      });
+
+      // Video click to pause
+      demoVideo.addEventListener('click', () => {
+        demoVideo.pause();
+        demoPlayBtn.classList.remove('hidden');
+      });
+
+      // Show button when video ends
+      demoVideo.addEventListener('ended', () => {
+        demoPlayBtn.classList.remove('hidden');
+      });
+
+      // Optional: Pause when scrolled out of view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting && !demoVideo.paused) {
+            demoVideo.pause();
+            demoPlayBtn.classList.remove('hidden');
+          }
+        });
+      }, { threshold: 0.5 });
+
+      observer.observe(demoVideo);
     });
   </script>
 
