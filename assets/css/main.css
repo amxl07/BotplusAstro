@@ -689,7 +689,7 @@ section,
 .hero {
   width: 100%;
   min-height: 70vh;
-  padding: 100px 0 40px 0;
+  padding: 0 0 40px 0 !important;
   position: relative;
   display: flex;
   align-items: center;
@@ -775,7 +775,9 @@ section,
   border-radius: 25px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 8px;  
+  font-weight: 600;
+  letter-spacing: 0.5px;
   transition: all 0.3s ease;
   cursor: pointer;
   margin-top: 30px;
