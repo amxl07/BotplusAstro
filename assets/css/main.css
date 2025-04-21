@@ -436,7 +436,6 @@ h6 {
   --default-color: #4a4a4a;
   border-top: 1px solid color-mix(in srgb, var(--accent-color), transparent 80%);
   font-size: 14px;
-  padding-bottom: 50px;
   position: relative;
 }
 
