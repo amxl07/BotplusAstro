@@ -778,7 +778,7 @@ section,
   gap: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
-  margin-top: 15px;
+  margin-top: 30px;
 }
 
 .unmute-btn:hover {
