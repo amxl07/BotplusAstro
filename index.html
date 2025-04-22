@@ -521,7 +521,17 @@
       if (video && unmuteBtn) {
         // Toggle mute state
         const toggleMute = () => {
+          const wasMuted = video.muted;
           video.muted = !video.muted;
+
+          // Restart video when unmuting
+          if (wasMuted) {
+            video.currentTime = 0;
+            video.play().catch(error => {
+              console.error('Error attempting to play video:', error);
+            });
+          }
+          
           unmuteBtn.classList.toggle('muted', !video.muted);
           unmuteBtn.querySelector('.btn-text').textContent = 
             video.muted ? 'Unmute to hear your agent speak' : 'Mute video';
