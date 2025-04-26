@@ -80,7 +80,7 @@
           <!-- Video Column -->
           <div class="col-xl-6 col-lg-5 video-column">
             <div class="ratio ratio-16x9">
-              <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline class="hero-video">
+              <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline class="hero-video" preload="auto">
                 <source src="assets/video/intro-scirpt.webm" type="video/webm">
                 <source src="assets/video/intro-scirpt.mp4" type="video/mp4">
                 Your browser does not support the video tag.
@@ -521,11 +521,32 @@
         };
         unmuteBtn.addEventListener('click', toggleMute);
 
-        // Handle autoplay restrictions
+        // iOS-specific setup
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        if (isIOS) {
+          // Prime audio context on first user interaction
+          const unlockAudio = () => {
+            heroVideo.play().then(() => {
+              heroVideo.pause();
+              heroVideo.currentTime = 0;
+            }).catch(console.error);
+            document.removeEventListener('touchstart', unlockAudio);
+          };
+          document.addEventListener('touchstart', unlockAudio, { once: true });
+        }
+
+        // Handle initial play
         heroVideo.play().catch(error => {
-          // Show paused state if autoplay fails
           unmuteBtn.style.display = 'block';
+          if (isIOS) {
+            // iOS needs explicit user interaction
+            unmuteBtn.style.display = 'block';
+            unmuteBtn.textContent = 'Tap to play';
+          }
         });
+
+        updateButtonState(); // Set initial state
+        
       }
 
     });
