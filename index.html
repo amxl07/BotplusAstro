@@ -511,7 +511,7 @@
           heroVideo.muted = !heroVideo.muted;
           if (wasMuted) {
             heroVideo.currentTime = 0;
-            video.play().catch(error => {
+            heroVideo.play().catch(error => {
               console.error('Error attempting to play video:', error);
             });
           }
@@ -522,7 +522,7 @@
         unmuteBtn.addEventListener('click', toggleMute);
 
         // Handle autoplay restrictions
-        video.play().catch(error => {
+        heroVideo.play().catch(error => {
           // Show paused state if autoplay fails
           unmuteBtn.style.display = 'block';
         });
