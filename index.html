@@ -75,7 +75,6 @@
                 Book a Demo
               </a>
             </div>
-
           </div>
           
           <!-- Video Column -->
@@ -93,8 +92,7 @@
               </button>
             </div>
           </div>
-        </div>
-        
+        </div>        
       </div>
     </section><!-- /Hero Section -->
     
@@ -513,16 +511,26 @@
           heroVideo.muted = !heroVideo.muted;
           if (wasMuted) {
             heroVideo.currentTime = 0;
-            heroVideo.play().catch(console.error);
+            video.play().catch(error => {
+              console.error('Error attempting to play video:', error);
+            });
           }
           unmuteBtn.classList.toggle('muted', !heroVideo.muted);
           unmuteBtn.querySelector('.btn-text').textContent = 
             heroVideo.muted ? 'Unmute to hear your agent speak' : 'Mute video';
         };
         unmuteBtn.addEventListener('click', toggleMute);
-        heroVideo.play().catch(() => unmuteBtn.style.display = 'block');
+
+        // Handle autoplay restrictions
+        video.play().catch(error => {
+          // Show paused state if autoplay fails
+          unmuteBtn.style.display = 'block';
+        });
       }
 
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
       // Generic Video Handler
       function setupVideo(videoId, playBtnId) {
         const video = document.getElementById(videoId);
