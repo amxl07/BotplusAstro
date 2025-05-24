@@ -1062,6 +1062,21 @@ section,
 
 
 /*--------------------------------------------------------------
+# Enterprises Section
+--------------------------------------------------------------*/
+
+#enterprise-services .icon {
+  color: var(--color-3);
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+/*--------------------------------------------------------------
 # Call To Action Section
 --------------------------------------------------------------*/
 .call-to-action {
