@@ -80,7 +80,8 @@
           <!-- Video Column -->
           <div class="col-xl-6 col-lg-5 video-column">
             <div class="ratio ratio-16x9">
-              <video id="heroVideo" autoplay muted loop playsinline webkit-playsinline class="hero-video" preload="auto">
+              <video id="heroVideo" autoplay muted loop playsinline class="hero-video" 
+                    preload="auto" poster="assets/img/intro-script.png">
                 <source src="assets/video/intro-scirpt.webm" type="video/webm">
                 <source src="assets/video/intro-scirpt.mp4" type="video/mp4">
                 Your browser does not support the video tag.
@@ -553,49 +554,53 @@
       const heroVideo = document.getElementById('heroVideo');
       const unmuteBtn = document.getElementById('unmuteBtn');
 
-      if (heroVideo && unmuteBtn) {
-        const toggleMute = () => {
-          const wasMuted = heroVideo.muted;
-          heroVideo.muted = !heroVideo.muted;
-          if (wasMuted) {
-            heroVideo.currentTime = 0;
-            heroVideo.play().catch(error => {
-              console.error('Error attempting to play video:', error);
-            });
-          }
-          unmuteBtn.classList.toggle('muted', !heroVideo.muted);
-          unmuteBtn.querySelector('.btn-text').textContent = 
-            heroVideo.muted ? 'Unmute to hear your agent speak' : 'Mute video';
-        };
-        unmuteBtn.addEventListener('click', toggleMute);
+      if (!heroVideo || !unmuteBtn) return;
 
-        // iOS-specific setup
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-        if (isIOS) {
-          // Prime audio context on first user interaction
-          const unlockAudio = () => {
-            heroVideo.play().then(() => {
-              heroVideo.pause();
-              heroVideo.currentTime = 0;
-            }).catch(console.error);
-            document.removeEventListener('touchstart', unlockAudio);
-          };
-          document.addEventListener('touchstart', unlockAudio, { once: true });
+      const toggleMute = () => {
+        const wasMuted = heroVideo.muted;
+        heroVideo.muted = !heroVideo.muted;
+        if (wasMuted) {
+          heroVideo.currentTime = 0;
+          heroVideo.play().catch(error => {
+            console.error('Error attempting to play video:', error);
+          });
         }
+        unmuteBtn.classList.toggle('muted', !heroVideo.muted);
+        unmuteBtn.querySelector('.btn-text').textContent = 
+          heroVideo.muted ? 'Unmute to hear your agent speak' : 'Mute video';
+      };
+      unmuteBtn.addEventListener('click', toggleMute);
 
-        // Handle initial play
-        heroVideo.play().catch(error => {
+      // iOS-specific setup
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      
+
+      // Safari autoplay handling
+      const handleAutoplay = () => {
+        heroVideo.play().catch(err => {
+          // Show play button if autoplay fails
           unmuteBtn.style.display = 'block';
           if (isIOS) {
-            // iOS needs explicit user interaction
-            unmuteBtn.style.display = 'block';
-            unmuteBtn.textContent = 'Tap to play';
+            unmuteBtn.querySelector('.btn-text').textContent = 'Tap to play';
           }
         });
+      };
 
-        updateButtonState(); // Set initial state
-        
+
+      // Initialize
+      if (isIOS) {
+        // Prime video on first touch
+        document.addEventListener('touchstart', () => {
+          heroVideo.play().then(() => {
+            heroVideo.pause();
+            heroVideo.currentTime = 0;
+          }).catch(console.error);
+        }, { once: true });
       }
+      
+
+      // Attempt autoplay
+      handleAutoplay();
 
     });
 
