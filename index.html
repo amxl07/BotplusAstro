@@ -248,6 +248,28 @@
 </section>
 
 
+<!-- Video Section -->
+<section id="product-video" class="video-section section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-8 col-lg-10">
+        <div class="ratio ratio-1x1 position-relative video-container">
+          <video id="introVideo" class="feature-video" playsinline webkit-playsinline
+                  preload="none" poster="assets/img/intro_video.png">
+            <source src="assets/video/intro_video.webm" type="video/webm">
+            <source src="assets/video/intro_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-controls">
+            <button id="introPlayBtn" class="pulsating-play-btn" aria-label="Play video"></button>
+            <button id="introPauseBtn" class="pulsating-pause-btn hidden" aria-label="Pause video"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- /Video Section -->
+
 
 <!-- Enterprise Services Section -->
 <section id="enterprise-services" class="services section" 
@@ -337,13 +359,16 @@
     <div class="row justify-content-center">
       <div class="col-xl-8 col-lg-10">
         <div class="ratio ratio-16x9 position-relative video-container">
-          <video id="featureVideo" class="feature-video" playsinline webkit-playsinline
-                  preload="none" poster="assets/video/botplus-campaign.jpg">
-            <source src="assets/video/botplus-campaign.webm" type="video/webm">
-            <source src="assets/video/botplus-campaign.mp4" type="video/mp4">
+          <video id="endVideo" class="feature-video" playsinline webkit-playsinline
+                  preload="none" poster="assets/img/end_video.png">
+            <source src="assets/video/end_video.webm" type="video/webm">
+            <source src="assets/video/end_video.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-          <button id="videoPlayBtn" class="pulsating-play-btn" aria-label="Play video"></button>
+          <div class="video-controls">
+            <button id="endPlayBtn" class="pulsating-play-btn" aria-label="Play video"></button>
+            <button id="endPauseBtn" class="pulsating-pause-btn hidden" aria-label="Pause video"></button>
+          </div>
         </div>
       </div>
     </div>
@@ -447,14 +472,17 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-xl-8 col-lg-10">
-        <div class="ratio ratio-16x9 position-relative video-container">
+        <div class="ratio ratio-1x1 position-relative video-container">
           <video id="demoVideo" class="feature-video" playsinline
-                  preload="none" poster="assets/video/botplus-demo.jpg">            
+                  preload="none" poster="assets/img/botplus-demo.jpg">            
             <source src="assets/video/botplus-demo.webm" type="video/webm">
             <source src="assets/video/botplus-demo.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-          <button id="demoPlayBtn" class="pulsating-play-btn" aria-label="Play video"></button>
+          <div class="video-controls">
+            <button id="demoPlayBtn" class="pulsating-play-btn" aria-label="Play video"></button>
+            <button id="demoPauseBtn" class="pulsating-pause-btn hidden" aria-label="Pause video"></button>
+          </div>
         </div>
       </div>
     </div>
@@ -606,32 +634,59 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       // Generic Video Handler
-      function setupVideo(videoId, playBtnId) {
+      function setupVideo(videoId, playBtnId, pauseBtnId) {
         const video = document.getElementById(videoId);
         const playBtn = document.getElementById(playBtnId);
+        const pauseBtn = document.getElementById(pauseBtnId);
         
-        if (!video || !playBtn) return;
+        if (!video || !playBtn || !pauseBtn) return;
 
-        const handler = (e) => {
+        const playHandler = (e) => {
           e.preventDefault();
           if (!video.src && video.dataset.src) {
             video.src = video.dataset.src;
           }
-          video.play().then(() => playBtn.classList.add('hidden'));
+          video.play().then(() => {
+            playBtn.classList.add('hidden');
+            pauseBtn.classList.remove('hidden');
+          });
         };
 
-        playBtn.addEventListener('click', handler);
-        video.addEventListener('click', () => {
+        const pauseHandler = (e) => {
+          e.preventDefault();
           video.pause();
+          pauseBtn.classList.add('hidden');
+          playBtn.classList.remove('hidden');
+        };
+
+        // Button event listeners
+        playBtn.addEventListener('click', playHandler);
+        pauseBtn.addEventListener('click', pauseHandler);
+
+        // Video event listeners
+        video.addEventListener('click', pauseHandler);
+        video.addEventListener('ended', () => {
+          pauseBtn.classList.add('hidden');
           playBtn.classList.remove('hidden');
         });
-        video.addEventListener('ended', () => playBtn.classList.remove('hidden'));
+        video.addEventListener('pause', () => {
+          // Only show play button if pause wasn't triggered by the pause button
+          if (!pauseBtn.classList.contains('hidden')) {
+            pauseBtn.classList.add('hidden');
+            playBtn.classList.remove('hidden');
+          }
+        });
+        video.addEventListener('play', () => {
+          playBtn.classList.add('hidden');
+          pauseBtn.classList.remove('hidden');
+        });
 
         // Intersection Observer
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (!entry.isIntersecting && !video.paused) {
               video.pause();
+              pauseBtn.classList.add('hidden');
               playBtn.classList.remove('hidden');
             }
           });
@@ -641,8 +696,9 @@
       }
 
       // Setup videos
-      setupVideo('featureVideo', 'videoPlayBtn');
-      setupVideo('demoVideo', 'demoPlayBtn');
+      setupVideo('introVideo', 'introPlayBtn', 'introPauseBtn');
+      setupVideo('endVideo', 'endPlayBtn', 'endPauseBtn');
+      setupVideo('demoVideo', 'demoPlayBtn', 'demoPauseBtn');
 
       // Lazy Loader
       const lazyVideoObserver = new IntersectionObserver((entries) => {
