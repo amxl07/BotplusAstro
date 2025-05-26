@@ -1094,10 +1094,10 @@ section,
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%); 
-  width: 5px;
-  height: 20px;
+  width: 4px;
+  height: 15px;
   background: #fff;
-  box-shadow: 12px 0 0 #fff;
+  box-shadow: 10px 0 0 #fff;
   margin-left: -5px;
   z-index: 100;
   transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -1110,10 +1110,10 @@ section,
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 5px;
-  height: 20px;
+  width: 4px;
+  height: 15px;
   background: #fff;
-  box-shadow: 12px 0 0 #fff;
+  box-shadow: 10px 0 0 #fff;
   margin-left: -5px;
   z-index: 200;  
   animation: none;
@@ -1123,8 +1123,8 @@ section,
 .pulsating-pause-btn:hover:after {
   /* Scaled-up accent color bars */
   background: var(--accent-color);
-  box-shadow: 12px 0 0 var(--accent-color);
-  transform: scale(20);
+  box-shadow: 10px 0 0 var(--accent-color);
+  transform: scale(25);
 }
 
 /* Smoother Animation */
