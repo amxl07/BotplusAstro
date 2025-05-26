@@ -1038,7 +1038,7 @@ section,
 
 .pulsating-play-btn:hover:after {
   border-left: 15px solid var(--accent-color);
-  transform: scale(20);
+  transform: scale(25);
 }
 
 @keyframes pulsate-play-btn {
