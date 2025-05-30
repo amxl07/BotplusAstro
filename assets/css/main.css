@@ -153,32 +153,9 @@ h6 {
   color: var(--heading-color);
 }
 
-.header .btn-getstarted,
-.header .btn-getstarted:focus {
-  color: var(--contrast-color);
-  background: var(--accent-color);
-  font-size: 14px;
-  padding: 8px 25px;
-  margin: 0 0 0 30px;
-  border-radius: 4px;
-  transition: 0.3s;
-}
-
-.header .btn-getstarted:hover,
-.header .btn-getstarted:focus:hover {
-  color: var(--contrast-color);
-  background: color-mix(in srgb, var(--accent-color), transparent 15%);
-}
-
 @media (max-width: 1200px) {
   .header .logo {
     order: 1;
-  }
-
-  .header .btn-getstarted {
-    order: 2;
-    margin: 0 15px 0 0;
-    padding: 6px 15px;
   }
 
   .header .navmenu {
@@ -698,22 +675,26 @@ section,
   border: 2px solid var(--accent-color);
   border-radius: 25px;
   padding: 8px 20px;
+  margin-top: 20px;
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
   text-decoration: none;
-}
-
-.btn-common--transparent {
-  background: color-mix(in srgb, var(--surface-color), transparent 20%);
+  font-weight: 600;
+  letter-spacing: 0.5px;
   color: var(--accent-color);
+  background: color-mix(in srgb, var(--surface-color), transparent 20%);
 }
 
-.btn-common--transparent:hover {
+.btn-common:hover {
   background: var(--accent-color);
   color: var(--contrast-color);
+}
+
+.btn-common--spaced {
+  margin-top: 30px;
 }
 
 
@@ -777,13 +758,6 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
-/* Updated Book a Demo Button */
-.hero .btn-get-started {
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-top: 20px;
-}
-
 /* Video Section */
 .video-column {
   display: flex;
@@ -805,26 +779,6 @@ section,
   text-align: center;
 }
 
-.unmute-btn {
-  background: color-mix(in srgb, var(--surface-color), transparent 20%);
-  border: 2px solid var(--accent-color);
-  color: var(--accent-color);
-  padding: 8px 20px;
-  border-radius: 25px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;  
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  margin-top: 30px;
-}
-
-.unmute-btn:hover {
-  background: var(--accent-color);
-  color: var(--contrast-color);
-}
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
@@ -1233,13 +1187,6 @@ section,
   opacity: 0.9;
 }
 
-.call-to-action .btn-get-started {
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-top: 20px;
-}
-
-
 
 
 /* Services Section */
@@ -1337,4 +1284,97 @@ section,
 }
 
 
+/*--------------------------------------------------------------
+# Contact Page Styles
+--------------------------------------------------------------*/
+.contact-form-card,
+.contact-info-card {
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(54, 79, 93, 0.08);
+  height: 100%;
+}
 
+.contact-info-content {
+  padding-left: 25px;
+}
+
+.contact-info-card .icon {
+  margin-right: 30px;
+}
+
+.contact-form-card .section-title h2,
+.contact-info-card .section-title h2 {
+  font-size: 28px;
+  color: var(--color-1);
+}
+
+.contact-form-card .section-title p,
+.contact-info-card .section-title p {
+  color: var(--color-2);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--color-1);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-control {
+  border: 1px solid color-mix(in srgb, var(--color-2), transparent 30%);
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 15px;
+  transition: all 0.3s;
+}
+
+.form-control:focus {
+  border-color: var(--color-3);
+  box-shadow: 0 10px 30px rgba(54, 79, 93, 0.08);
+}
+
+.info-item {
+  padding-left: 10%;
+}
+
+
+.info-item .icon {
+  color: var(--color-3);
+}
+
+.info-item h4 {
+  font-size: 18px;
+  color: var(--color-1);
+}
+
+.info-item p {
+  color: var(--color-2);
+  margin-bottom: 0;
+}
+
+
+/* Form status messages */
+.loading,
+.error-message,
+.sent-message {
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.loading {
+  background-color: var(--color-5);
+  color: var(--color-2);
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.sent-message {
+  background-color: #d4edda;
+  color: #155724;
+}
