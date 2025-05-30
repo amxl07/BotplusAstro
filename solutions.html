@@ -43,7 +43,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/#adaptive-customer-intelligence">Features</a></li>          
+          <li><a href="/#adaptive-customer-intelligence">Features</a></li>
           <li><a href="/#enterprise-services">For Enterprise</a></li>
           <li><a href="/solutions.html">Our Solutions</a></li>
           <li><a href="/#call-to-action">Book Demo</a></li>
@@ -77,7 +77,7 @@
     <div class="row gy-4">
       
       <div class="col-lg-6 services-content" data-aos="fade-up" data-aos-delay="200">
-        <h3>Call Center Replacement</h3>
+        <h3>AI Call Center Replacement</h3>
         <p class="services-italic-text">Transform your customer support with AI agents that never sleep, never get tired, and speak every language.</p>
         <p>Our AI voice agents handle everything from simple inquiries to complex technical support with human-like warmth and understanding. They integrate seamlessly with your existing phone systems while providing detailed analytics on every interaction.</p>
       
@@ -318,155 +318,6 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-
-  <script>// Add this at the end of your body or in a module
-    document.addEventListener('DOMContentLoaded', () => {
-      // Hero Video Controls
-      const heroVideo = document.getElementById('heroVideo');
-      const unmuteBtn = document.getElementById('unmuteBtn');
-
-      if (!heroVideo || !unmuteBtn) return;
-
-      const toggleMute = () => {
-        const wasMuted = heroVideo.muted;
-        heroVideo.muted = !heroVideo.muted;
-        if (wasMuted) {
-          heroVideo.currentTime = 0;
-          heroVideo.play().catch(error => {
-            console.error('Error attempting to play video:', error);
-          });
-        }
-        unmuteBtn.classList.toggle('muted', !heroVideo.muted);
-        unmuteBtn.querySelector('.btn-text').textContent = 
-          heroVideo.muted ? 'Unmute to hear your agent speak' : 'Mute video';
-      };
-      unmuteBtn.addEventListener('click', toggleMute);
-
-      // iOS-specific setup
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-      
-
-      // Safari autoplay handling
-      const handleAutoplay = () => {
-        heroVideo.play().catch(err => {
-          // Show play button if autoplay fails
-          unmuteBtn.style.display = 'block';
-          if (isIOS) {
-            unmuteBtn.querySelector('.btn-text').textContent = 'Tap to play';
-          }
-        });
-      };
-
-
-      // Initialize
-      if (isIOS) {
-        // Prime video on first touch
-        document.addEventListener('touchstart', () => {
-          heroVideo.play().then(() => {
-            heroVideo.pause();
-            heroVideo.currentTime = 0;
-          }).catch(console.error);
-        }, { once: true });
-      }
-      
-
-      // Attempt autoplay
-      handleAutoplay();
-
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // Generic Video Handler
-      function setupVideo(videoId, playBtnId, pauseBtnId) {
-        const video = document.getElementById(videoId);
-        const playBtn = document.getElementById(playBtnId);
-        const pauseBtn = document.getElementById(pauseBtnId);
-        
-        if (!video || !playBtn || !pauseBtn) return;
-
-        const playHandler = (e) => {
-          e.preventDefault();
-          if (!video.src && video.dataset.src) {
-            video.src = video.dataset.src;
-          }
-          video.play().then(() => {
-            playBtn.classList.add('hidden');
-            pauseBtn.classList.remove('hidden');
-          });
-        };
-
-        const pauseHandler = (e) => {
-          e.preventDefault();
-          video.pause();
-          pauseBtn.classList.add('hidden');
-          playBtn.classList.remove('hidden');
-        };
-
-        // Button event listeners
-        playBtn.addEventListener('click', playHandler);
-        pauseBtn.addEventListener('click', pauseHandler);
-
-        // Video event listeners
-        video.addEventListener('click', pauseHandler);
-        video.addEventListener('ended', () => {
-          pauseBtn.classList.add('hidden');
-          playBtn.classList.remove('hidden');
-        });
-        video.addEventListener('pause', () => {
-          // Only show play button if pause wasn't triggered by the pause button
-          if (!pauseBtn.classList.contains('hidden')) {
-            pauseBtn.classList.add('hidden');
-            playBtn.classList.remove('hidden');
-          }
-        });
-        video.addEventListener('play', () => {
-          playBtn.classList.add('hidden');
-          pauseBtn.classList.remove('hidden');
-        });
-
-        // Intersection Observer
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting && !video.paused) {
-              video.pause();
-              pauseBtn.classList.add('hidden');
-              playBtn.classList.remove('hidden');
-            }
-          });
-        }, { threshold: 0.5 });
-
-        observer.observe(video);
-      }
-
-      // Setup videos
-      setupVideo('introVideo', 'introPlayBtn', 'introPauseBtn');
-      setupVideo('endVideo', 'endPlayBtn', 'endPauseBtn');
-      setupVideo('demoVideo', 'demoPlayBtn', 'demoPauseBtn');
-
-      // Lazy Loader
-      const lazyVideoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const video = entry.target;
-            if (video.dataset.src) {
-              video.src = video.dataset.src;
-              video.removeAttribute('data-src');
-            }
-            video.load();
-            lazyVideoObserver.unobserve(video);
-          }
-        });
-      }, { rootMargin: '100px 0px', threshold: 0.01 });
-
-      document.querySelectorAll('video[data-src]').forEach(video => {
-        lazyVideoObserver.observe(video);
-      });
-    });
-
-  </script>
-
-  <!-- Add this script in your footer or before closing </body> -->
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
 </body>
 

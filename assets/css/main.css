@@ -235,7 +235,7 @@ h6 {
   }
 
 
-  .navmenu li:hover a,
+  .navmenu li:hover > a,
   .navmenu .active,
   .navmenu .active:focus {
     color: var(--nav-hover-color);
@@ -302,6 +302,8 @@ h6 {
 @media (max-width: 1199px) {
   .navmenu {
     position: relative;
+    padding: 10px 0 !important; 
+    font-size: 16px !important;
     z-index: 9999;
   }
 
@@ -312,7 +314,7 @@ h6 {
     right: 0;
     background: var(--surface-color);
     border-radius: 8px;
-    padding: 10px 0; /* Reduced container padding */
+    padding: 8px 0;
     margin: 8px 0;
     min-width: 220px; /* Slightly wider for better touch targets */
     box-shadow: 0 8px 24px rgba(54, 79, 93, 0.15);
@@ -320,13 +322,46 @@ h6 {
     z-index: 9998;
   }
 
+  .navmenu .dropdown ul {
+    position: static;
+    display: none;
+    z-index: 99;
+    padding: 2px 0;
+    margin: 10px 20px;
+    background-color: var(--nav-dropdown-background-color);
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    box-shadow: none;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .navmenu .dropdown ul ul {
+    background-color: rgba(33, 37, 41, 0.1);
+  }
+
+  /* Hide all dropdown menus by default */
+  .navmenu .dropdown > ul,
+  .navmenu .dropdown .dropdown ul {
+    display: none !important;
+  }
+
+
+  /* Show dropdown when active class is added */
+  .navmenu .dropdown.dropdown-active > ul,
+  .navmenu .dropdown .dropdown.dropdown-active > ul {
+    display: block !important;
+  }
+
+  .navmenu .dropdown>.dropdown-active {
+    display: block;
+    background-color: rgba(33, 37, 41, 0.03);
+  }
+
+
   .navmenu li {
-    padding: 8px 20px; /* Added padding for list items */
+    padding: 10px 20px; /* Added padding for list items */
   }
 
   .navmenu a {
-    padding: 12px 0 !important; /* Vertical padding for links */
-    font-size: 17px !important; /* Slightly larger text */
     color: var(--nav-color);
     display: block;
     transition: 0.3s;
