@@ -49,41 +49,13 @@
   /**
    * Toggle mobile nav dropdowns
    */
-  document.querySelectorAll('.navmenu .dropdown > a').forEach(navmenu => {
+  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
     navmenu.addEventListener('click', function(e) {
       e.preventDefault();
-      // Only run on mobile
-      if (window.innerWidth >= 1200) return;
-
-      const parentItem = this.closest('.dropdown');
-
-      // Toggle dropdown-active class on parent item
-      parentItem.classList.toggle('dropdown-active');
-
-      //this.parentNode.classList.toggle('active');
-      //this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-
-      // Close sibling dropdowns when opening this one
-      if (parentItem.classList.contains('dropdown-active')) {
-        const siblings = parentItem.parentElement.querySelectorAll('.dropdown');
-        siblings.forEach(sibling => {
-          if (sibling !== parentItem) {
-            sibling.classList.remove('dropdown-active');
-          }
-        });
-      }
-
+      this.parentNode.classList.toggle('active');
+      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
       e.stopImmediatePropagation();
     });
-  });
-
-  // Close dropdowns when clicking elsewhere
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.dropdown')) {
-      document.querySelectorAll('.navmenu .dropdown').forEach(item => {
-        item.classList.remove('dropdown-active');
-      });
-    }
   });
 
   /**
