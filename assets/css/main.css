@@ -1815,3 +1815,103 @@ section,
     margin-bottom: 15px;
   }
 }
+
+
+/*FLOATING BUTTON*/
+/* Professional Floating CTA – Square, Brand-Matching */
+.pro-floating-cta {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 997;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.pfc-btn {
+  width: 58px;
+  height: 58px;
+  background: #ffffff;
+  color: #364f5d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(54, 79, 93, 0.18);
+  transition: all 0.35s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid rgba(54, 79, 93, 0.08);
+}
+
+.pfc-btn i {
+  font-size: 26px;
+  transition: all 0.35s ease;
+  position: relative;
+  z-index: 2;
+}
+
+/* Tooltip text – hidden until hover */
+.pfc-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Hover Effects */
+.pfc-btn:hover {
+  width: 152px;
+  justify-content: flex-start;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.pfc-btn:hover i {
+  color: white;
+  margin-right: 10px;
+  position: static; /* Change from relative to static */
+  transform: none;
+}
+
+.pfc-btn:hover .pfc-text {
+  opacity: 1;
+  position: static; /* Change from absolute to static */
+  transform: none;
+  left: auto;
+  top: auto;
+}
+
+/* Colors only on hover */
+.pfc-call:hover { background: #e74c3c; border-color: #e74c3c; }
+.pfc-wa:hover   { background: #25d366; border-color: #25d366; }
+
+/* Mobile – always expanded */
+@media (max-width: 768px) {
+  .pro-floating-cta {
+    bottom: 70px;
+    right: 15px;
+    flex-direction: row;
+    gap: 12px;
+  }
+  .pfc-btn {
+    width: auto;
+    padding: 14px 22px;
+    border-radius: 50px;
+  }
+  .pfc-btn i { color: white; }
+  .pfc-text { opacity: 1; }
+  .pfc-call { background: #e74c3c; }
+  .pfc-wa   { background: #25d366; }
+}

@@ -2,37 +2,383 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) - Google Ads AW-631550479 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-631550479"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-631550479');
+  </script>
+  <!-- Event snippet for "Contact (1)" conversion -->  
+    <script>  
+    function gtag_report_conversion(url) {  
+      var callback = function () {  
+        if (typeof(url) != 'undefined') {  
+          window.location = url;  
+        }  
+      };  
+      gtag('event', 'conversion', {  
+          'send_to': 'AW-631550479/Ko7OCOGsis4bEI_kkq0C',  
+          'event_callback': callback  
+      });  
+      return false;  
+    }  
+    </script>
+    
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>AI Automation & Customer Support Services UAE | BotPlus</title>
   <meta name="description" content="Boost your business with AI automation and customer support services in UAE. BotPlus delivers efficient, smart solutions for seamless operations and growth.">
   <link rel="canonical" href="https://www.botplus.ae/"/>
   <meta name="google-site-verification" content="Uodpr348gNegDTK6w_0-4jBDYpPm259wW3rh6zzvat8" />
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQDKP3YCWQ"></script>
+  <!-- Enhanced Performance Logging & Analysis -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  
-    gtag('config', 'G-ZQDKP3YCWQ');
+    // Mark the start of page load
+    performance.mark('page-start');
+
+    // Track when HTML parsing starts
+    const htmlParseStart = performance.now();
+    console.log('🚀 HTML Parsing Started at:', htmlParseStart.toFixed(2), 'ms');
+
+    // Log comprehensive performance metrics
+    window.addEventListener('load', function() {
+      performance.mark('page-fully-loaded');
+
+      setTimeout(() => {
+        // ============================================
+        // CORE WEB VITALS & CRITICAL METRICS
+        // ============================================
+        const perfData = performance.getEntriesByType('navigation')[0];
+        const paintEntries = performance.getEntriesByType('paint');
+
+        console.group('🎯 CORE WEB VITALS (Critical for Google Rankings)');
+
+        // First Paint (FP)
+        const fp = paintEntries.find(entry => entry.name === 'first-paint');
+        if (fp) {
+          console.log('🎨 First Paint (FP):', fp.startTime.toFixed(2), 'ms',
+            fp.startTime < 1000 ? '✅ Excellent' : fp.startTime < 1800 ? '⚠️ Good' : '🔴 Needs Improvement');
+        }
+
+        // First Contentful Paint (FCP) - CRITICAL
+        const fcp = paintEntries.find(entry => entry.name === 'first-contentful-paint');
+        if (fcp) {
+          console.log('🖼️ First Contentful Paint (FCP):', fcp.startTime.toFixed(2), 'ms',
+            fcp.startTime < 1800 ? '✅ Good' : fcp.startTime < 3000 ? '⚠️ Needs Improvement' : '🔴 Poor');
+        }
+
+        // Largest Contentful Paint (LCP) - CRITICAL for Core Web Vitals
+        if (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes.includes('largest-contentful-paint')) {
+          new PerformanceObserver((entryList) => {
+            const entries = entryList.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            console.log('📊 Largest Contentful Paint (LCP):', lastEntry.renderTime.toFixed(2), 'ms',
+              lastEntry.renderTime < 2500 ? '✅ Good' : lastEntry.renderTime < 4000 ? '⚠️ Needs Improvement' : '🔴 Poor');
+            console.log('   LCP Element:', lastEntry.element);
+          }).observe({type: 'largest-contentful-paint', buffered: true});
+        }
+
+        // Time to Interactive (TTI)
+        const tti = perfData.domInteractive - perfData.fetchStart;
+        console.log('⚡ Time to Interactive (TTI):', tti.toFixed(2), 'ms',
+          tti < 3800 ? '✅ Good' : tti < 7300 ? '⚠️ Moderate' : '🔴 Slow');
+
+        console.groupEnd();
+
+        // ============================================
+        // RENDER BLOCKING ANALYSIS
+        // ============================================
+        console.group('🚫 RENDER BLOCKING RESOURCES (Critical Issue!)');
+        const resources = performance.getEntriesByType('resource');
+
+        // CSS Files (Always render-blocking)
+        const cssFiles = resources.filter(r => r.name.includes('.css') && r.initiatorType === 'link');
+        if (cssFiles.length > 0) {
+          console.log('🔴 BLOCKING CSS Files:', cssFiles.length);
+          cssFiles.forEach(css => {
+            console.log(`   ⏱️ ${css.duration.toFixed(0)}ms - ${css.name.split('/').pop()}
+               [Blocks rendering until loaded]`);
+          });
+          console.log('💡 Solution: Inline critical CSS, defer non-critical CSS');
+        }
+
+        // Synchronous Scripts
+        const syncScripts = resources.filter(r =>
+          r.name.includes('.js') &&
+          !r.name.includes('async') &&
+          r.initiatorType === 'script'
+        );
+        if (syncScripts.length > 0) {
+          console.log('🔴 BLOCKING Scripts:', syncScripts.length);
+          syncScripts.forEach(js => {
+            console.log(`   ⏱️ ${js.duration.toFixed(0)}ms - ${js.name.split('/').pop()}`);
+          });
+        }
+
+        // Fonts
+        const fonts = resources.filter(r => r.name.includes('fonts.googleapis') || r.name.includes('fonts.gstatic'));
+        if (fonts.length > 0) {
+          console.log('⚠️ Font Loading:', fonts.length, 'requests');
+          fonts.forEach(font => {
+            console.log(`   ⏱️ ${font.duration.toFixed(0)}ms - ${font.name.includes('googleapis') ? 'Font CSS' : 'Font File'}`);
+          });
+          console.log('💡 Tip: Use font-display: swap to prevent render blocking');
+        }
+
+        console.groupEnd();
+
+        // ============================================
+        // CRITICAL PATH ANALYSIS
+        // ============================================
+        console.group('🛤️ CRITICAL RENDERING PATH');
+        console.log('📝 HTML Download:', (perfData.responseEnd - perfData.requestStart).toFixed(2), 'ms');
+        console.log('🎨 CSS Parse + CSSOM Build:', (perfData.domInteractive - perfData.responseEnd).toFixed(2), 'ms');
+        console.log('⚙️ JavaScript Execution:', (perfData.domContentLoadedEventStart - perfData.domInteractive).toFixed(2), 'ms');
+        console.log('🖼️ Render Tree Construction:', (perfData.domComplete - perfData.domContentLoadedEventEnd).toFixed(2), 'ms');
+
+        const criticalPathTime = perfData.domContentLoadedEventEnd - perfData.fetchStart;
+        console.log('⏱️ Total Critical Path Time:', criticalPathTime.toFixed(2), 'ms',
+          criticalPathTime < 1500 ? '✅ Fast' : criticalPathTime < 3000 ? '⚠️ Moderate' : '🔴 Slow');
+        console.groupEnd();
+
+        // ============================================
+        // IMAGE OPTIMIZATION ANALYSIS
+        // ============================================
+        console.group('🖼️ IMAGE LOADING ANALYSIS');
+        const images = resources.filter(r =>
+          r.initiatorType === 'img' ||
+          r.name.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i)
+        );
+
+        let totalImageSize = 0;
+        let largeImages = [];
+
+        images.forEach(img => {
+          const sizeKB = img.transferSize / 1024;
+          totalImageSize += img.transferSize;
+
+          if (sizeKB > 100) {
+            largeImages.push({
+              name: img.name.split('/').pop(),
+              size: sizeKB,
+              duration: img.duration
+            });
+          }
+        });
+
+        console.log('📊 Total Images:', images.length);
+        console.log('💾 Total Image Size:', (totalImageSize / 1024 / 1024).toFixed(2), 'MB');
+
+        if (largeImages.length > 0) {
+          console.log('⚠️ Large Images (>100KB):', largeImages.length);
+          largeImages.sort((a, b) => b.size - a.size).forEach(img => {
+            console.log(`   🔴 ${img.name}: ${img.size.toFixed(0)}KB (${img.duration.toFixed(0)}ms)`);
+          });
+          console.log('💡 Recommendation: Optimize/compress images, use WebP format');
+        }
+
+        // Check for eager-loaded images
+        const eagerImages = images.filter(img => img.startTime < 1000);
+        if (eagerImages.length > 5) {
+          console.log('⚠️ Too many images loading eagerly:', eagerImages.length);
+          console.log('💡 Solution: Use lazy loading for below-fold images');
+        }
+
+        console.groupEnd();
+
+        // ============================================
+        // THIRD-PARTY SCRIPTS ANALYSIS
+        // ============================================
+        console.group('🌐 THIRD-PARTY SCRIPTS (External Dependencies)');
+        const thirdParty = resources.filter(r =>
+          !r.name.includes(window.location.hostname) &&
+          (r.name.includes('.js') || r.name.includes('.css'))
+        );
+
+        if (thirdParty.length > 0) {
+          let totalThirdPartyTime = 0;
+          thirdParty.forEach(tp => {
+            totalThirdPartyTime += tp.duration;
+            const domain = new URL(tp.name).hostname;
+            console.log(`   ${tp.duration.toFixed(0)}ms - ${domain} - ${tp.name.split('/').pop()}`);
+          });
+          console.log('⏱️ Total Third-Party Load Time:', totalThirdPartyTime.toFixed(0), 'ms');
+
+          if (totalThirdPartyTime > 1000) {
+            console.log('🔴 Third-party scripts are slowing down your page!');
+            console.log('💡 Solution: Defer non-critical third-party scripts');
+          }
+        }
+        console.groupEnd();
+
+        // ============================================
+        // MAIN THREAD BLOCKING TIME
+        // ============================================
+        console.group('⏱️ MAIN THREAD ANALYSIS');
+
+        // Long Tasks API (if supported)
+        if (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes.includes('longtask')) {
+          const longTasks = performance.getEntriesByType('longtask');
+          if (longTasks.length > 0) {
+            console.log('🔴 Long Tasks Detected:', longTasks.length);
+            longTasks.forEach((task, i) => {
+              console.log(`   Task ${i+1}: ${task.duration.toFixed(0)}ms (blocking main thread)`);
+            });
+            console.log('💡 Solution: Break up long tasks, use web workers');
+          } else {
+            console.log('✅ No long tasks detected');
+          }
+        }
+
+        // JavaScript execution time
+        const jsResources = resources.filter(r => r.name.includes('.js'));
+        const totalJsTime = jsResources.reduce((sum, js) => sum + js.duration, 0);
+        console.log('⚙️ Total JavaScript Load Time:', totalJsTime.toFixed(0), 'ms');
+
+        if (totalJsTime > 2000) {
+          console.log('⚠️ JavaScript is taking too long to load');
+          console.log('💡 Solution: Code splitting, tree shaking, minification');
+        }
+
+        console.groupEnd();
+
+        // ============================================
+        // ORIGINAL METRICS (Enhanced)
+        // ============================================
+        console.group('🔍 DETAILED NAVIGATION TIMING');
+        console.log('DNS Lookup:', (perfData.domainLookupEnd - perfData.domainLookupStart).toFixed(2), 'ms');
+        console.log('TCP Connection:', (perfData.connectEnd - perfData.connectStart).toFixed(2), 'ms');
+        console.log('Request Time:', (perfData.responseStart - perfData.requestStart).toFixed(2), 'ms');
+        console.log('Response Time:', (perfData.responseEnd - perfData.responseStart).toFixed(2), 'ms');
+        console.log('---');
+        console.log('DOM Interactive:', (perfData.domInteractive - perfData.fetchStart).toFixed(2), 'ms');
+        console.log('DOM Content Loaded:', (perfData.domContentLoadedEventEnd - perfData.fetchStart).toFixed(2), 'ms');
+        console.log('DOM Complete:', (perfData.domComplete - perfData.fetchStart).toFixed(2), 'ms');
+        console.log('Load Event Complete:', (perfData.loadEventEnd - perfData.fetchStart).toFixed(2), 'ms');
+        console.log('---');
+        console.log('⏱️ TOTAL PAGE LOAD TIME:', (perfData.loadEventEnd - perfData.fetchStart).toFixed(2), 'ms',
+          `(${((perfData.loadEventEnd - perfData.fetchStart) / 1000).toFixed(2)}s)`);
+        console.groupEnd();
+
+        // ============================================
+        // RESOURCE BREAKDOWN
+        // ============================================
+        console.group('⚠️ SLOW RESOURCES (>500ms)');
+        resources
+          .filter(r => r.duration > 500)
+          .sort((a, b) => b.duration - a.duration)
+          .forEach(r => {
+            const sizeInfo = r.transferSize ? ` [${(r.transferSize / 1024).toFixed(0)}KB]` : '';
+            console.log(`${r.duration.toFixed(0)}ms${sizeInfo} - ${r.name}`);
+          });
+        console.groupEnd();
+
+        console.group('🎥 VIDEO RESOURCES');
+        resources
+          .filter(r => r.name.includes('.mp4') || r.name.includes('.webm'))
+          .forEach(r => {
+            console.log(`${r.duration.toFixed(0)}ms - ${(r.transferSize / 1024 / 1024).toFixed(2)}MB - ${r.name.split('/').pop()}`);
+          });
+        console.groupEnd();
+
+        console.group('📦 CSS RESOURCES');
+        resources
+          .filter(r => r.name.includes('.css'))
+          .forEach(r => {
+            const sizeKB = r.transferSize ? `[${(r.transferSize / 1024).toFixed(0)}KB]` : '';
+            console.log(`${r.duration.toFixed(0)}ms ${sizeKB} - ${r.name.split('/').pop()}`);
+          });
+        console.groupEnd();
+
+        console.group('⚙️ JS RESOURCES');
+        resources
+          .filter(r => r.name.includes('.js'))
+          .forEach(r => {
+            const sizeKB = r.transferSize ? `[${(r.transferSize / 1024).toFixed(0)}KB]` : '';
+            console.log(`${r.duration.toFixed(0)}ms ${sizeKB} - ${r.name.split('/').pop()}`);
+          });
+        console.groupEnd();
+
+        console.group('🔤 FONT RESOURCES');
+        resources
+          .filter(r => r.name.includes('fonts.googleapis') || r.name.includes('fonts.gstatic'))
+          .forEach(r => {
+            console.log(`${r.duration.toFixed(0)}ms - ${r.name}`);
+          });
+        console.groupEnd();
+
+        // ============================================
+        // ACTIONABLE RECOMMENDATIONS
+        // ============================================
+        console.group('💡 CRITICAL RECOMMENDATIONS');
+
+        const recommendations = [];
+
+        // Check FCP
+        if (fcp && fcp.startTime > 1800) {
+          recommendations.push('🔴 CRITICAL: First Contentful Paint is slow. Inline critical CSS and defer non-critical resources.');
+        }
+
+        // Check render-blocking CSS
+        if (cssFiles.length > 2) {
+          recommendations.push(`⚠️ HIGH: ${cssFiles.length} render-blocking CSS files. Consider inlining critical CSS.`);
+        }
+
+        // Check large images
+        if (largeImages.length > 0) {
+          recommendations.push(`⚠️ MEDIUM: ${largeImages.length} large images detected. Optimize and compress images.`);
+        }
+
+        // Check third-party
+        const thirdPartyTime = thirdParty.reduce((sum, tp) => sum + tp.duration, 0);
+        if (thirdPartyTime > 1000) {
+          recommendations.push(`⚠️ MEDIUM: Third-party scripts taking ${thirdPartyTime.toFixed(0)}ms. Defer non-critical scripts.`);
+        }
+
+        if (recommendations.length === 0) {
+          console.log('✅ No critical issues detected! Your site is well optimized.');
+        } else {
+          recommendations.forEach(rec => console.log(rec));
+        }
+
+        console.groupEnd();
+
+      }, 100); // Small delay to ensure all metrics are captured
+    });
   </script>
- 
 
   <!-- Favicons -->
-  <link href="assets/img/logo_white.png" rel="icon" type="image/svg+xml">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+<!-- Favicons -->
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-  <!-- Fonts -->
+  <!-- Fonts (Optimized - Only loading essential weights with font-display: swap) -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Load fonts with swap for better performance (Google Fonts handles preloading internally) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Preconnect to External Domains for Performance -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://assets.calendly.com">
+
+  <!-- DNS Prefetch for faster external resource loading -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+  <!-- Preload Critical Resources for Faster Rendering -->
+  <link rel="preload" href="assets/css/main.css" as="style">
+  <link rel="preload" href="assets/js/main.js" as="script">
+  <link rel="preload" href="assets/img/logo_Blue.png" as="image">
   
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
@@ -45,8 +391,8 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
-        <!-- BotPlus Logo -->
-        <img src="assets/img/logo_Blue.png" alt="BotPlus Logo">
+        <!-- BotPlus Logo - Eager loading for above-the-fold -->
+        <img src="assets/img/logo_Blue.png" alt="BotPlus Logo" loading="eager" fetchpriority="high">
         <h1 class="sitename">BotPlus</h1>
       </a>
 
@@ -57,7 +403,8 @@
               <li><a href="products.html">Our Products</a></li>
               <li><a href="solutions.html">Solutions</a></li>
               <li><a href="index.html#enterprise-services">For Enterprises</a></li>
-              <li><a href="workflow.html">Workflow</a></li>              
+              <li><a href="workflow.html">Workflow</a></li>   
+              <li><a href="blog/">Blog</a></li>
               <li><a href="contact.html">Contact Us</a></li>
             </ul>
       </nav>
@@ -69,7 +416,7 @@
 
     <!-- Modified Hero Section -->
     <section id="hero" class="hero section">
-      <img src="assets/img/logo tran.svg" alt="" data-aos="fade-in" class="">
+      <img src="assets/img/logo tran.svg" loading="eager" fetchpriority="high" style="opacity: 1;">
       
       <div class="container">
         <div class="row align-items-center g-4" data-aos="zoom-out">
@@ -93,7 +440,7 @@
           <div class="col-xl-6 col-lg-5 video-column">
             <div class="ratio ratio-16x9">
               <video id="heroVideo" autoplay muted loop playsinline class="hero-video" 
-                    preload="auto" poster="assets/img/intro-script.png">
+                    preload="auto" poster="assets/img/intro-script.webp">
                 <source src="assets/video/intro-scirpt.webm" type="video/webm">
                 <source src="assets/video/intro-scirpt.mp4" type="video/mp4">
                 Your browser does not support the video tag.
@@ -268,7 +615,7 @@
         <div class="ratio ratio-1x1 position-relative video-container" 
               data-aos="zoom-in" data-aos-delay="100">
           <video id="introVideo" class="feature-video" playsinline webkit-playsinline
-                  preload="none" poster="assets/img/intro_video.png">
+                  preload="none" data-poster="assets/img/intro_video.webp">
             <source src="assets/video/intro_video.webm" type="video/webm">
             <source src="assets/video/intro_video.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -374,7 +721,7 @@
         <div class="ratio ratio-16x9 position-relative video-container" 
               data-aos="zoom-in" data-aos-delay="100">
           <video id="endVideo" class="feature-video" playsinline webkit-playsinline
-                  preload="none" poster="assets/img/end_video.png">
+                  preload="none" data-poster="assets/img/end_video.webp">
             <source src="assets/video/end_video.webm" type="video/webm">
             <source src="assets/video/end_video.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -489,7 +836,7 @@
         <div class="ratio ratio-1x1 position-relative video-container demo" 
               data-aos="zoom-in" data-aos-delay="100">
           <video id="demoVideo" class="feature-video" playsinline
-                  preload="none" poster="assets/img/botplus-demo.jpg">            
+                  preload="none" data-poster="assets/img/botplus-demo.jpg">
             <source src="assets/video/botplus-demo.webm" type="video/webm">
             <source src="assets/video/botplus-demo.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -558,7 +905,8 @@
               <li><a href="products.html">Our Products</a></li>
               <li><a href="solutions.html">Solutions</a></li>
               <li><a href="index.html#enterprise-services">For Enterprises</a></li>
-              <li><a href="workflow.html">Workflow</a></li>              
+              <li><a href="workflow.html">Workflow</a></li>     
+              <li><a href="/blog/">Blog</a></li>
               <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </div>
@@ -579,26 +927,77 @@
 
   </footer>
 
+<!-- Floating Call & WhatsApp Buttons – FINAL WORKING VERSION -->
+<div class="pro-floating-cta">
+  <a href="tel:+971501503004"  
+     onclick="return gtag_report_conversion(this.href);"  
+     class="pfc-btn pfc-call" aria-label="Call +971 50 150 3004">  
+    <i class="bi bi-telephone-fill"></i>  
+    <span class="pfc-text">Call Now</span>  
+  </a>
+  <a href="https://wa.me/971501503004?text=Hi%20BotPlus%2C%20I'm%20interested%20in%20your%20AI%20avatars" 
+     target="_blank" class="pfc-btn pfc-wa" aria-label="Chat on WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+    <span class="pfc-text">Chat Now</span>
+  </a>
+</div>
+
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader"></div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
+  <!-- Vendor JS Files (Deferred for non-blocking load) -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+  <script src="assets/vendor/aos/aos.js" defer></script>
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <!-- Main JS File (Deferred for non-blocking load) -->
+  <script src="assets/js/main.js" defer></script>
 
   <script>// Add this at the end of your body or in a module
+    // Track JavaScript errors
+    window.addEventListener('error', function(e) {
+      console.error('❌ JavaScript Error:', e.message, 'at', e.filename, 'line', e.lineno);
+    });
+
+    // Track when DOM is ready
+    performance.mark('dom-content-loaded');
+    console.log('⏱️ DOMContentLoaded at:', performance.now().toFixed(0), 'ms');
+
     document.addEventListener('DOMContentLoaded', () => {
+      performance.mark('dom-ready');
+      console.log('✅ DOM Ready at:', performance.now().toFixed(0), 'ms');
+
       // Hero Video Controls
       const heroVideo = document.getElementById('heroVideo');
       const unmuteBtn = document.getElementById('unmuteBtn');
 
-      if (!heroVideo || !unmuteBtn) return;
+      if (!heroVideo || !unmuteBtn) {
+        console.error('⚠️ Hero video or unmute button not found');
+        return;
+      }
+
+      // Track video loading
+      heroVideo.addEventListener('loadstart', () => {
+        performance.mark('hero-video-loadstart');
+        console.log('🎥 Hero video load started at:', performance.now().toFixed(0), 'ms');
+      });
+
+      heroVideo.addEventListener('loadedmetadata', () => {
+        performance.mark('hero-video-metadata');
+        console.log('🎥 Hero video metadata loaded at:', performance.now().toFixed(0), 'ms');
+      });
+
+      heroVideo.addEventListener('loadeddata', () => {
+        performance.mark('hero-video-data');
+        console.log('🎥 Hero video data loaded at:', performance.now().toFixed(0), 'ms');
+      });
+
+      heroVideo.addEventListener('canplay', () => {
+        performance.mark('hero-video-canplay');
+        console.log('🎥 Hero video can play at:', performance.now().toFixed(0), 'ms');
+      });
 
       const toggleMute = () => {
         const wasMuted = heroVideo.muted;
@@ -649,13 +1048,27 @@
     });
 
     document.addEventListener('DOMContentLoaded', () => {
+      console.log('📹 Setting up additional videos...');
+
       // Generic Video Handler
       function setupVideo(videoId, playBtnId, pauseBtnId) {
         const video = document.getElementById(videoId);
         const playBtn = document.getElementById(playBtnId);
         const pauseBtn = document.getElementById(pauseBtnId);
-        
-        if (!video || !playBtn || !pauseBtn) return;
+
+        if (!video || !playBtn || !pauseBtn) {
+          console.warn(`⚠️ Video setup incomplete for ${videoId}`);
+          return;
+        }
+
+        // Track video loading
+        video.addEventListener('loadstart', () => {
+          console.log(`🎥 ${videoId} load started at:`, performance.now().toFixed(0), 'ms');
+        });
+
+        video.addEventListener('loadeddata', () => {
+          console.log(`🎥 ${videoId} data loaded at:`, performance.now().toFixed(0), 'ms');
+        });
 
         const playHandler = (e) => {
           e.preventDefault();
@@ -716,30 +1129,123 @@
       setupVideo('endVideo', 'endPlayBtn', 'endPauseBtn');
       setupVideo('demoVideo', 'demoPlayBtn', 'demoPauseBtn');
 
-      // Lazy Loader
+      // Lazy Loader for Videos and Poster Images
       const lazyVideoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const video = entry.target;
+
+            // Load video source if data-src exists
             if (video.dataset.src) {
               video.src = video.dataset.src;
               video.removeAttribute('data-src');
             }
+
+            // Load poster image if data-poster exists
+            if (video.dataset.poster) {
+              video.poster = video.dataset.poster;
+              video.removeAttribute('data-poster');
+              console.log('📸 Lazy loaded poster:', video.poster.split('/').pop());
+            }
+
             video.load();
             lazyVideoObserver.unobserve(video);
           }
         });
       }, { rootMargin: '100px 0px', threshold: 0.01 });
 
-      document.querySelectorAll('video[data-src]').forEach(video => {
+      // Observe videos with data-src or data-poster
+      document.querySelectorAll('video[data-src], video[data-poster]').forEach(video => {
         lazyVideoObserver.observe(video);
       });
     });
 
   </script>
 
-  <!-- Add this script in your footer or before closing </body> -->
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <!-- Deferred Calendly Loading - Loads only when user clicks "Book a Demo" -->
+  <script>
+    // Track if Calendly has been loaded
+    let calendlyLoaded = false;
+    let calendlyLoading = false;
+
+    // Function to load Calendly scripts
+    function loadCalendly() {
+      if (calendlyLoaded || calendlyLoading) return Promise.resolve();
+
+      calendlyLoading = true;
+
+      return new Promise((resolve, reject) => {
+        // Load CSS
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://assets.calendly.com/assets/external/widget.css';
+        document.head.appendChild(link);
+
+        // Load JS
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.type = 'text/javascript';
+        script.onload = () => {
+          calendlyLoaded = true;
+          calendlyLoading = false;
+          resolve();
+        };
+        script.onerror = () => {
+          calendlyLoading = false;
+          reject(new Error('Failed to load Calendly'));
+        };
+        document.body.appendChild(script);
+      });
+    }
+
+    // Add event listeners to all "Book a Demo" buttons
+    document.addEventListener('DOMContentLoaded', () => {
+      const bookDemoButtons = document.querySelectorAll('a[onclick*="Calendly"]');
+
+      bookDemoButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          // Load Calendly first, then open the widget
+          loadCalendly().then(() => {
+            if (window.Calendly) {
+              Calendly.initPopupWidget({
+                url: 'https://calendly.com/justin-manj/demo?&hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=364f5d&back=1'
+              });
+            }
+          }).catch(err => {
+            console.error('Error loading Calendly:', err);
+            alert('Unable to load booking widget. Please try again.');
+          });
+        });
+      });
+    });
+  </script>
+  
+ 
+  <!-- Deferred Google Analytics - Loads after page is interactive -->
+  <script>
+    // Defer Google Analytics to not block page rendering
+    window.addEventListener('load', function() {
+      // Wait 1 second after page load to ensure optimal performance
+      setTimeout(function() {
+        // Create and load gtag.js script
+        var gaScript = document.createElement('script');
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZQDKP3YCWQ';
+        gaScript.async = true;
+        document.head.appendChild(gaScript);
+
+        // Initialize Google Analytics
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZQDKP3YCWQ');
+
+        console.log('📊 Google Analytics loaded (deferred for performance)');
+      }, 1000);
+    });
+  </script>
+  
 
 </body>
 
