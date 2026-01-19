@@ -2,13 +2,11 @@
   "rewrites": [
     {
       "source": "/blog/",
-      "destination": "https://botplus.page.gd",
-      "permanent": false
+      "destination": "https://botplus.page.gd"
     },
     {
       "source": "/blog/:path*",
-      "destination": "https://botplus.page.gd/:path*",
-      "permanent": false
+      "destination": "https://botplus.page.gd/:path*"
     }
   ]
 }
