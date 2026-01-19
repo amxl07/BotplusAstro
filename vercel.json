@@ -1,7 +1,7 @@
 {
-  "redirects": [
+  "rewrites": [
     {
-      "source": "/blog",
+      "source": "/blog/",
       "destination": "https://botplus.page.gd",
       "permanent": false
     },
