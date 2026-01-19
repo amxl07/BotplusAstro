@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "https://botplus.page.gd/blog.php"
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "https://botplus.page.gd/blog.php/:path*"
+    }
+  ]
+}
