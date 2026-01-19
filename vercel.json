@@ -1,12 +1,14 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/blog",
-      "destination": "https://botplus.page.gd"
+      "destination": "https://botplus.page.gd",
+      "permanent": false
     },
     {
       "source": "/blog/:path*",
-      "destination": "https://botplus.page.gd/:path*"
+      "destination": "https://botplus.page.gd/:path*",
+      "permanent": false
     }
   ]
 }
