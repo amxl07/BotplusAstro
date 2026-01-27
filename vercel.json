@@ -1,12 +1,31 @@
 {
+
   "rewrites": [
+
     {
-      "source": "/blog/",
-      "destination": "https://botplus.page.gd"
+
+      "source": "/blog",
+
+      "destination": "https://blog.botplus.ae/"
+
     },
+
     {
+
+      "source": "/blog/",
+
+      "destination": "https://blog.botplus.ae/"
+
+    },
+
+    {
+
       "source": "/blog/:path*",
-      "destination": "https://botplus.page.gd/:path*"
+
+      "destination": "https://blog.botplus.ae/:path*"
+
     }
+
   ]
+
 }
