@@ -1902,16 +1902,70 @@ section,
   .pro-floating-cta {
     bottom: 70px;
     right: 15px;
-    flex-direction: row;
-    gap: 12px;
+    flex-direction: column;
+    gap: 14px;
   }
+  
+  /* Default state - compact icons */
   .pfc-btn {
-    width: auto;
-    padding: 14px 22px;
-    border-radius: 50px;
+    width: 58px;
+    height: 58px;
+    padding: 0;
+    border-radius: 16px;
+    background: #ffffff;
+    color: #364f5d;
+    justify-content: center;
   }
-  .pfc-btn i { color: white; }
-  .pfc-text { opacity: 1; }
-  .pfc-call { background: #e74c3c; }
-  .pfc-wa   { background: #25d366; }
+  
+  .pfc-btn i {
+    font-size: 26px;
+    color: #364f5d;
+    margin-right: 0;
+    transition: all 0.35s ease;
+  }
+  
+  .pfc-text {
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Active/Expanded state */
+  .pfc-btn:active,
+  .pfc-btn:focus {
+    width: 152px;
+    justify-content: flex-start;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  
+  .pfc-btn:active i,
+  .pfc-btn:focus i {
+    color: white;
+    margin-right: 10px;
+    position: static;
+    transform: none;
+  }
+  
+  .pfc-btn:active .pfc-text,
+  .pfc-btn:focus .pfc-text {
+    opacity: 1;
+    position: static;
+    transform: none;
+  }
+  
+  /* Colors when expanded */
+  .pfc-call:active,
+  .pfc-call:focus { 
+    background: #e74c3c;
+    border-color: #e74c3c;
+  }
+  
+  .pfc-wa:active,
+  .pfc-wa:focus { 
+    background: #25d366;
+    border-color: #25d366;
+  }
 }
