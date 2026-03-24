@@ -229,4 +229,74 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+  /**
+   * Video Controls - Play/Pause functionality
+   */
+  function initVideoControls() {
+    const videoControls = [
+      { playBtn: 'introPlayBtn', pauseBtn: 'introPauseBtn', video: 'introVideo' },
+      { playBtn: 'endPlayBtn', pauseBtn: 'endPauseBtn', video: 'endVideo' },
+      { playBtn: 'demoPlayBtn', pauseBtn: 'demoPauseBtn', video: 'demoVideo' }
+    ];
+
+    videoControls.forEach(function(control) {
+      const playBtn = document.getElementById(control.playBtn);
+      const pauseBtn = document.getElementById(control.pauseBtn);
+      const video = document.getElementById(control.video);
+
+      if (!playBtn || !pauseBtn || !video) return;
+
+      // Play button click
+      playBtn.addEventListener('click', function() {
+        video.play();
+        playBtn.classList.add('hidden');
+        pauseBtn.classList.remove('hidden');
+      });
+
+      // Pause button click
+      pauseBtn.addEventListener('click', function() {
+        video.pause();
+        pauseBtn.classList.add('hidden');
+        playBtn.classList.remove('hidden');
+      });
+
+      // Video ended
+      video.addEventListener('ended', function() {
+        pauseBtn.classList.add('hidden');
+        playBtn.classList.remove('hidden');
+      });
+
+      // Video paused by user (e.g., clicking on video)
+      video.addEventListener('pause', function() {
+        pauseBtn.classList.add('hidden');
+        playBtn.classList.remove('hidden');
+      });
+
+      // Video playing
+      video.addEventListener('play', function() {
+        playBtn.classList.add('hidden');
+        pauseBtn.classList.remove('hidden');
+      });
+    });
+  }
+
+  window.addEventListener('load', initVideoControls);
+
+  /**
+   * Hero Video Unmute Control
+   */
+  function initHeroVideoControl() {
+    const unmuteBtn = document.getElementById('unmuteBtn');
+    const heroVideo = document.getElementById('heroVideo');
+
+    if (!unmuteBtn || !heroVideo) return;
+
+    unmuteBtn.addEventListener('click', function() {
+      heroVideo.muted = false;
+      unmuteBtn.style.display = 'none';
+    });
+  }
+
+  window.addEventListener('load', initHeroVideoControl);
+
 })();
