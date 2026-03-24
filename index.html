@@ -32,7 +32,8 @@
   <meta name="description" content="Boost your business with AI automation and customer support services in UAE. BotPlus delivers efficient, smart solutions for seamless operations and growth.">
   <link rel="canonical" href="https://www.botplus.ae/"/>
   <meta name="google-site-verification" content="Uodpr348gNegDTK6w_0-4jBDYpPm259wW3rh6zzvat8" />
-  <!-- Enhanced Performance Logging & Analysis -->
+  <!-- Enhanced Performance Logging & Analysis - Commented out for production -->
+  <!--
   <script>
     // Mark the start of page load
     performance.mark('page-start');
@@ -347,6 +348,7 @@
       }, 100); // Small delay to ensure all metrics are captured
     });
   </script>
+  -->
 
   <!-- Favicons -->
 <!-- Favicons -->
@@ -951,11 +953,15 @@
   <!-- Vendor JS Files (Deferred for non-blocking load) -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
   <script src="assets/vendor/aos/aos.js" defer></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js" defer></script>
 
   <!-- Main JS File (Deferred for non-blocking load) -->
   <script src="assets/js/main.js" defer></script>
 
-  <script>// Add this at the end of your body or in a module
+  <!-- Performance tracking commented out for production -->
+  <!--
+  <script>
+    // Add this at the end of your body or in a module
     // Track JavaScript errors
     window.addEventListener('error', function(e) {
       console.error('❌ JavaScript Error:', e.message, 'at', e.filename, 'line', e.lineno);
@@ -1161,6 +1167,7 @@
     });
 
   </script>
+  -->
 
   <!-- Deferred Calendly Loading - Loads only when user clicks "Book a Demo" -->
   <script>
