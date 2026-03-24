@@ -287,13 +287,19 @@
    */
   function initHeroVideoControl() {
     const unmuteBtn = document.getElementById('unmuteBtn');
+    const btnText = unmuteBtn ? unmuteBtn.querySelector('.btn-text') : null;
     const heroVideo = document.getElementById('heroVideo');
 
     if (!unmuteBtn || !heroVideo) return;
 
     unmuteBtn.addEventListener('click', function() {
-      heroVideo.muted = false;
-      unmuteBtn.style.display = 'none';
+      if (heroVideo.muted) {
+        heroVideo.muted = false;
+        btnText.textContent = 'Mute';
+      } else {
+        heroVideo.muted = true;
+        btnText.textContent = 'Unmute to hear your agent speak';
+      }
     });
   }
 
