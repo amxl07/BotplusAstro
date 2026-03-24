@@ -110,9 +110,23 @@
   /**
    * Initiate glightbox
    */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
+  function initGlightbox() {
+    if (typeof GLightbox !== 'undefined') {
+      const glightbox = GLightbox({
+        selector: '.glightbox'
+      });
+    } else {
+      // Wait for GLightbox to load
+      window.addEventListener('load', () => {
+        if (typeof GLightbox !== 'undefined') {
+          const glightbox = GLightbox({
+            selector: '.glightbox'
+          });
+        }
+      });
+    }
+  }
+  initGlightbox();
 
   /**
    * Init swiper sliders

@@ -352,10 +352,10 @@
 
   <!-- Favicons -->
 <!-- Favicons -->
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
   <!-- Fonts (Optimized - Only loading essential weights with font-display: swap) -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -375,15 +375,20 @@
   <!-- Preload Critical Resources for Faster Rendering -->
   <link rel="preload" href="assets/css/main.css" as="style">
   <link rel="preload" href="assets/js/main.js" as="script">
-  <link rel="preload" href="assets/img/logo_Blue.png" as="image">
-  
+  <link rel="preload" href="assets/img/logo_blue.png" as="image">
+
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Calendly CSS (Loaded asynchronously to prevent render blocking) -->
+  <link rel="preload" href="https://assets.calendly.com/assets/external/widget.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css"></noscript>
 
 </head>
 
@@ -634,9 +639,9 @@
 
 
 <!-- Enterprise Services Section -->
-<section id="enterprise-services" class="services section" 
-         style="background: linear-gradient(rgba(255,255,255,0.98), rgba(255,255,255,0.98)), 
-                            url('assets/img/logo_Blue.png') center/20%;">
+<section id="enterprise-services" class="services section"
+         style="background: linear-gradient(rgba(255,255,255,0.98), rgba(255,255,255,0.98)),
+                            url('assets/img/logo_blue.png') center/20%;">
   <div class="container">
     <div class="section-title" data-aos="fade-up">
       <h2>Agentic AI Built for Enterprises</h2>
@@ -954,6 +959,7 @@
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
   <script src="assets/vendor/aos/aos.js" defer></script>
   <script src="assets/vendor/purecounter/purecounter_vanilla.js" defer></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js" defer></script>
 
   <!-- Main JS File (Deferred for non-blocking load) -->
   <script src="assets/js/main.js" defer></script>
