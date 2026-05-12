@@ -114,8 +114,7 @@
                     <p>Complete the form below and our team will get back to you within 24 hours.</p>
                   </div>
 
-                  <form id="contactForm" action="https://docs.google.com/forms/d/e/1FAIpQLSelcQkDnFHOg840cFAfCNJQ2jzasPCAs2EvlrlCmXoOA61DAg/formResponse"
-                        method="POST" class="email-form">
+                  <form id="contactForm" class="email-form">
                     <div class="row mt-3">
                       <div class="col-md-6 form-group">
                         <label for="name" class="form-label">Your Name</label>
@@ -142,7 +141,7 @@
                     </div>
                     <div class="form-group mt-3">
                       <label for="message" class="form-label">Message</label>
-                      <textarea class="form-control" name="entry.934533576" rows="5" placeholder="Tell us about your project or inquiry..." required></textarea>
+                      <textarea class="form-control" name="entry.934533576" id="message" rows="5" placeholder="Tell us about your project or inquiry..." required></textarea>
                     </div>
                     <div class="text-center mt-4">
                       <button type="submit" class="btn-common btn-wide">Send Message</button>
@@ -281,6 +280,47 @@
   <script src="assets/js/main.js" defer></script>
 
   <script>
+    const SUPABASE_URL = 'https://ssxnamsctmryhwfdytya.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_2sZvj7GxFUCRUUpi-i0RZg_8AjJzXg-';
+
+    let supabaseClient = null;
+
+    function loadSupabase() {
+      if (window.supabase) return Promise.resolve(window.supabase);
+
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+        script.onload = () => resolve(window.supabase);
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    async function getSupabaseClient() {
+      if (supabaseClient) return supabaseClient;
+
+      const supabase = await loadSupabase();
+      supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      return supabaseClient;
+    }
+
+    function setFormStatus(status, message) {
+      const loading = document.querySelector('.loading');
+      const errorMessage = document.querySelector('.error-message');
+      const sentMessage = document.querySelector('.sent-message');
+
+      if (loading) loading.style.display = status === 'loading' ? 'block' : 'none';
+      if (errorMessage) {
+        errorMessage.style.display = status === 'error' ? 'block' : 'none';
+        if (message) errorMessage.textContent = message;
+      }
+      if (sentMessage) {
+        sentMessage.style.display = status === 'success' ? 'block' : 'none';
+        if (message) sentMessage.textContent = message;
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       // Initialize AOS
       AOS.init({
@@ -292,7 +332,9 @@
       // Form submission handling
       const contactForm = document.getElementById('contactForm');
       if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('focusin', loadSupabase, { once: true });
+
+        contactForm.addEventListener('submit', async function(e) {
           e.preventDefault();
           
           // Validate form
@@ -300,39 +342,47 @@
             return;
           }
           
-          // Show loading state
-          document.querySelector('.loading').style.display = 'block';
-          document.querySelector('.error-message').style.display = 'none';
-          document.querySelector('.sent-message').style.display = 'none';
-          
-          // Create hidden iframe for submission
-          const iframe = document.createElement('iframe');
-          iframe.name = 'hidden-iframe';
-          iframe.style.display = 'none';
-          document.body.appendChild(iframe);
-          
-          // Set form target to iframe
-          this.target = 'hidden-iframe';
-          
-          // Submit form
-          this.submit();
-          
-          // Check for successful submission (Google Forms returns 200 even on errors)
-          setTimeout(() => {
-            document.querySelector('.loading').style.display = 'none';
-            document.querySelector('.sent-message').style.display = 'block';
+          setFormStatus('loading');
+
+          const leadData = {
+            name: document.getElementById('name').value.trim(),
+            company: document.getElementById('company').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            country_code: '+971',
+            phone_number: document.getElementById('phone').value.trim() || null,
+            subject: document.getElementById('subject').value.trim(),
+            message: document.getElementById('message').value.trim(),
+            source: 'site-contact',
+            product: 'botplus',
+            created_at: new Date().toISOString()
+          };
+
+          try {
+            const supabase = await getSupabaseClient();
+            const { error } = await supabase
+              .from('leads_bp')
+              .insert([leadData]);
+
+            if (error) {
+              if (error.code === '23505') {
+                setFormStatus('success', "You've already submitted this form. We'll be in touch soon!");
+                this.reset();
+                return;
+              }
+
+              throw error;
+            }
+
+            setFormStatus('success', 'Your message has been sent. Thank you!');
             this.reset();
-            
-            // Remove iframe after submission
+
             setTimeout(() => {
-              document.body.removeChild(iframe);
-            }, 1000);
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-              document.querySelector('.sent-message').style.display = 'none';
+              setFormStatus('idle');
             }, 5000);
-          }, 1500);
+          } catch (error) {
+            console.error('Contact form submission error:', error);
+            setFormStatus('error', 'Error sending message. Please try again.');
+          }
         });
       }
     });
