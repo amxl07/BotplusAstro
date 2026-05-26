@@ -114,7 +114,7 @@
                     <p>Complete the form below and our team will get back to you within 24 hours.</p>
                   </div>
 
-                  <form id="contactForm" class="email-form">
+                  <form id="contactForm" class="email-form" novalidate>
                     <div class="row mt-3">
                       <div class="col-md-6 form-group">
                         <label for="name" class="form-label">Your Name</label>
@@ -379,6 +379,105 @@
       return data;
     }
 
+    function showFieldError(fieldId, message) {
+      const field = document.getElementById(fieldId);
+      if (!field) return;
+
+      field.classList.add('field-invalid');
+      field.classList.remove('field-valid');
+      field.setAttribute('aria-invalid', 'true');
+
+      const parent = field.closest('.form-group');
+      if (!parent) return;
+
+      let errorContainer = parent.querySelector('.field-error');
+      if (!errorContainer) {
+        errorContainer = document.createElement('div');
+        errorContainer.className = 'field-error';
+        parent.appendChild(errorContainer);
+      }
+
+      errorContainer.innerHTML = `<i class="bi bi-exclamation-circle-fill" aria-hidden="true"></i><span>${message}</span>`;
+    }
+
+    function clearFieldError(fieldId) {
+      const field = document.getElementById(fieldId);
+      if (!field) return;
+
+      field.classList.remove('field-invalid');
+      field.removeAttribute('aria-invalid');
+
+      const parent = field.closest('.form-group');
+      const errorContainer = parent ? parent.querySelector('.field-error') : null;
+      if (errorContainer) errorContainer.remove();
+    }
+
+    function showFieldSuccess(fieldId) {
+      const field = document.getElementById(fieldId);
+      if (!field) return;
+
+      clearFieldError(fieldId);
+      if (field.value.trim()) field.classList.add('field-valid');
+    }
+
+    function clearAllFieldErrors() {
+      ['name', 'email', 'phone', 'company', 'subject', 'message'].forEach((fieldId) => {
+        clearFieldError(fieldId);
+        const field = document.getElementById(fieldId);
+        if (field) field.classList.remove('field-valid');
+      });
+    }
+
+    function getNativeFieldError(field) {
+      const fieldLabels = {
+        name: 'your name',
+        email: 'email',
+        company: 'your company',
+        subject: 'a subject',
+        message: 'your message'
+      };
+
+      if (field.validity.valueMissing) {
+        return `Please enter ${fieldLabels[field.id] || 'this field'}`;
+      }
+
+      if (field.id === 'email' && field.validity.typeMismatch) {
+        return 'Please enter a valid business email address.';
+      }
+
+      return field.validationMessage;
+    }
+
+    function showNativeFieldErrors(form) {
+      let firstInvalidField = null;
+      const fields = form.querySelectorAll('input, textarea');
+
+      fields.forEach((field) => {
+        if (!field.checkValidity()) {
+          if (!firstInvalidField) firstInvalidField = field;
+          showFieldError(field.id, getNativeFieldError(field));
+        } else {
+          clearFieldError(field.id);
+        }
+      });
+
+      if (firstInvalidField) firstInvalidField.focus();
+    }
+
+    function getValidationErrorField(message) {
+      if (!message) return null;
+
+      const normalizedMessage = message.toLowerCase();
+      if (normalizedMessage.includes('email') || normalizedMessage.includes('business email')) return 'email';
+      if (normalizedMessage.includes('phone')) return 'phone';
+      if (normalizedMessage.includes('subject')) return 'subject';
+      if (normalizedMessage.includes('message')) return 'message';
+      if (normalizedMessage.includes('company')) return 'company';
+      if (normalizedMessage.includes('name')) return 'name';
+
+      return null;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       // Initialize AOS
       AOS.init({
@@ -390,15 +489,36 @@
       // Form submission handling
       const contactForm = document.getElementById('contactForm');
       if (contactForm) {
+        contactForm.querySelectorAll('input, textarea').forEach((field) => {
+          field.addEventListener('invalid', function(e) {
+            e.preventDefault();
+            showFieldError(this.id, getNativeFieldError(this));
+          });
+
+          field.addEventListener('input', function() {
+            clearFieldError(this.id);
+            this.classList.remove('field-valid');
+          });
+
+          field.addEventListener('blur', function() {
+            if (!this.checkValidity()) {
+              showFieldError(this.id, getNativeFieldError(this));
+            } else {
+              showFieldSuccess(this.id);
+            }
+          });
+        });
+
         contactForm.addEventListener('submit', async function(e) {
           e.preventDefault();
+          clearAllFieldErrors();
+          setFormStatus('idle');
           
           // Validate form
           if (!this.checkValidity()) {
+            showNativeFieldErrors(this);
             return;
           }
-          
-          setFormStatus('loading');
 
           const leadData = {
             name: document.getElementById('name').value.trim(),
@@ -415,9 +535,18 @@
 
           const validationError = validateLeadData(leadData);
           if (validationError) {
-            setFormStatus('error', validationError);
+            const fieldId = getValidationErrorField(validationError);
+            if (fieldId) {
+              showFieldError(fieldId, validationError);
+              const field = document.getElementById(fieldId);
+              if (field) field.focus();
+            } else {
+              setFormStatus('error', validationError);
+            }
             return;
           }
+
+          setFormStatus('loading');
 
           try {
             const data = await submitLead(leadData);

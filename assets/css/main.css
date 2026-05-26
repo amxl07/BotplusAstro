@@ -1532,6 +1532,32 @@ section,
   box-shadow: 0 10px 30px rgba(54, 79, 93, 0.08);
 }
 
+.form-control.field-invalid,
+.form-control.field-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.12);
+}
+
+.form-control.field-valid,
+.form-control.field-valid:focus {
+  border-color: var(--color-3);
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--color-3), transparent 80%);
+}
+
+.field-error {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.field-error i {
+  font-size: 13px;
+  line-height: 1;
+}
+
 .info-item {
   padding-left: 10%;
 }
