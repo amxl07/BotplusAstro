@@ -1,0 +1,133 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  bodyClass?: string;
+  noindex?: boolean;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  showNavbar?: boolean;
+  showFooter?: boolean;
+  activePath?: string;
+}
+
+const {
+  title,
+  description = 'BotPlus creates photorealistic AI avatars and intelligent agents for customer support, retail, call centers, and workflow automation.',
+  canonical = new URL(Astro.url.pathname, Astro.site).toString(),
+  bodyClass = 'index-page',
+  noindex = false,
+  ogImage = '/assets/img/logo_Blue.png',
+  jsonLd,
+  showNavbar = true,
+  showFooter = true,
+  activePath = Astro.url.pathname
+} = Astro.props;
+
+const canonicalUrl = canonical.startsWith('http') ? canonical : new URL(canonical, Astro.site).toString();
+const robots = noindex ? 'noindex, nofollow' : 'index, follow';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="google-site-verification" content="Uodpr348gNegDTK6w_0-4jBDYpPm259wW3rh6zzvat8" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://assets.calendly.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="preload" href="/assets/css/main.css" as="style" />
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    <link href="/assets/css/main.css" rel="stylesheet" />
+    <link rel="preload" href="https://assets.calendly.com/assets/external/widget.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" /></noscript>
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body class={bodyClass}>
+    {showNavbar && <Navbar activePath={activePath} />}
+    <main class="main">
+      <slot />
+    </main>
+    {showFooter && <Footer />}
+
+    <div class="pro-floating-cta">
+      <a href="tel:+971501503004" onclick="return gtag_report_conversion(this.href);" class="pfc-btn pfc-call" aria-label="Call +971 50 150 3004">
+        <i class="bi bi-telephone-fill"></i>
+        <span class="pfc-text">Call Now</span>
+      </a>
+      <a href="https://wa.me/971501503004?text=Hi%20BotPlus%2C%20I'm%20interested%20in%20your%20AI%20avatars" target="_blank" rel="noopener" class="pfc-btn pfc-wa" aria-label="Chat on WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+        <span class="pfc-text">Chat Now</span>
+      </a>
+    </div>
+
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/assets/vendor/aos/aos.js" defer></script>
+    <script src="/assets/vendor/purecounter/purecounter_vanilla.js" defer></script>
+    <script src="/assets/vendor/glightbox/js/glightbox.min.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') window.location = url;
+        };
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-631550479/Ko7OCOGsis4bEI_kkq0C',
+            'event_callback': callback
+          });
+        } else {
+          callback();
+        }
+        return false;
+      }
+
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var gaScript = document.createElement('script');
+          gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-631550479';
+          gaScript.async = true;
+          document.head.appendChild(gaScript);
+          gtag('js', new Date());
+          gtag('config', 'AW-631550479');
+        }, 1000);
+      });
+    </script>
+    <slot name="scripts" />
+  </body>
+</html>

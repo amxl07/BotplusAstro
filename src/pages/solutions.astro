@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SolutionBlock from '../components/SolutionBlock.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { solutions } from '../data/siteContent';
+---
+<BaseLayout
+  title="Business Process Automation Services UAE | Botplus"
+  description="BotPlus offers Business Process Automation Services in UAE to optimize workflows, save time, and increase efficiency using advanced AI solutions for your business."
+  canonical="/solutions/"
+  activePath="/solutions/"
+>
+  <HeroSection
+    title="Seamless Integration Solutions"
+    body="Discover how our photorealistic AI avatars and intelligent agents can transform customer interactions across all your platforms."
+    variant="solutions"
+  />
+
+  {solutions.map((solution) => <SolutionBlock {...solution} />)}
+
+  <CtaBand
+    id="future-section"
+    title="The Future of Customer Experience"
+    body="Across digital, voice, and physical touchpoints, our solutions embody the future of AI for customer experience in UAE, helping businesses deliver seamless, human-like engagement at every step."
+  />
+</BaseLayout>

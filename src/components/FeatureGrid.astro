@@ -1,0 +1,42 @@
+---
+interface Feature {
+  icon?: string;
+  title: string;
+  description: string;
+  caption?: string;
+}
+
+interface Props {
+  features: Feature[];
+  cardClass?: string;
+  columns?: string;
+  iconBox?: boolean;
+}
+
+const { features, cardClass = 'feature-card', columns = 'col-md-6 col-lg-4', iconBox = false } = Astro.props;
+---
+{iconBox ? (
+  <div class="row gy-4">
+    {features.map((feature, index) => (
+      <div class={columns} data-aos="zoom-out" data-aos-delay={(index + 1) * 50}>
+        <div class="icon-box">
+          {feature.icon && <div class="icon"><i class={`bi ${feature.icon}`}></i></div>}
+          <h4 class="title">{feature.title}</h4>
+          <p class="description">
+            {feature.caption && <><span class="caption"><em>{feature.caption}</em></span><br /></>}
+            {feature.description}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+) : (
+  <div class="features-grid">
+    {features.map((feature, index) => (
+      <div class={cardClass} data-aos="zoom-out" data-aos-delay={(index + 1) * 50}>
+        <h4>{feature.icon && <i class={`bi ${feature.icon}`}></i>} <span>{feature.title}</span></h4>
+        <p>{feature.description}</p>
+      </div>
+    ))}
+  </div>
+)}

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import WorkflowGrid from '../components/WorkflowGrid.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { workflowFeatures } from '../data/siteContent';
+---
+<BaseLayout
+  title="Workflow Automation in UAE & Saudi Arabia | BotPlus"
+  description="BotPlus offers reliable workflow automation in Saudi Arabia and UAE to automate tasks, improve efficiency, and drive business success."
+  canonical="/workflow/"
+  activePath="/workflow/"
+>
+  <HeroSection
+    title="Intelligent Conversation Workflow"
+    intro="Our advanced AI workflow ensures every customer interaction is handled with precision, emotional intelligence, and contextual understanding."
+    body="The BotPlus system dynamically analyzes each query to determine the optimal response path, whether it requires simple information retrieval, API integration, or human escalation."
+    variant="solutions"
+  />
+
+  <WorkflowGrid
+    intro="Our intelligent workflow system ensures every customer interaction is handled with precision and emotional intelligence."
+    features={workflowFeatures}
+  />
+
+  <CtaBand
+    id="workflow-cta"
+    title="Business System Integration"
+    body="Our AI-driven platform extends beyond conversations to enable seamless workflow automation in the UAE and Saudi Arabia, connecting CRMs, ERPs, and ticketing tools into one intelligent ecosystem."
+  />
+</BaseLayout>

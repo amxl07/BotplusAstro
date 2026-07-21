@@ -1,0 +1,30 @@
+---
+interface Props {
+  url?: string;
+  thankYou?: boolean;
+}
+
+const { url = 'https://calendly.com/justin-manj/30min?embed_domain=&embed_type=Inline&hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=364f5d&back=1&month=2025-04', thankYou = true } = Astro.props;
+---
+<div class="calendly-inline-widget calendly-review-frame" data-url={url}></div>
+{thankYou && (
+  <div id="thankYouMessage" class="text-center py-5 d-none">
+    <h2 class="color-1 mb-4">Thank you for booking a demo!</h2>
+    <p class="lead">We're excited to show you BotPlus in action.</p>
+    <p>You'll receive a confirmation email with meeting details shortly.</p>
+    <a href="/" class="btn-get-started mt-4">Return Home</a>
+  </div>
+)}
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script is:inline>
+  function handleCalendlyEvent(e) {
+    if (e.data.event === 'calendly.event_scheduled') {
+      const thankYouMessage = document.getElementById('thankYouMessage');
+      const widget = document.querySelector('.calendly-inline-widget');
+      if (thankYouMessage) thankYouMessage.classList.remove('d-none');
+      if (widget) widget.style.display = 'none';
+    }
+  }
+  window.addEventListener('message', handleCalendlyEvent);
+</script>

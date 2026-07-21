@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ContactForm from '../components/ContactForm.astro';
+import ContactInfo from '../components/ContactInfo.astro';
+---
+<BaseLayout
+  title="AI Agency in Saudi Arabia | AI in Retail UAE - Contact Us"
+  description="BotPlus is a top AI agency in Saudi Arabia, delivering AI solutions for retail in UAE to streamline operations and improve customer experience."
+  canonical="/contact/"
+  bodyClass="contact-page"
+  activePath="/contact/"
+>
+  <HeroSection
+    title="Let's Start a Conversation"
+    body="Our team is ready to show you how BotPlus can transform your customer experience with photorealistic AI avatars."
+    variant="services"
+  />
+
+  <section id="contact" class="contact section">
+    <div class="container" data-aos="fade-up">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="row g-5">
+            <div class="col-lg-7" data-aos="fade-right" data-aos-delay="100"><ContactForm /></div>
+            <div class="col-lg-5" data-aos="fade-left" data-aos-delay="100"><ContactInfo /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

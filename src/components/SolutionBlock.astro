@@ -1,0 +1,37 @@
+---
+import FeatureGrid from './FeatureGrid.astro';
+
+interface Feature {
+  icon?: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  id?: string;
+  title: string;
+  intro: string;
+  body?: string;
+  image: string;
+  imageAlt: string;
+  features: Feature[];
+  reverse?: boolean;
+}
+
+const { id, title, intro, body, image, imageAlt, features, reverse = false } = Astro.props;
+---
+<section id={id} class="solutions section">
+  <div class="container">
+    <div class={`row gy-4 ${reverse ? 'flex-row-reverse' : ''}`}>
+      <div class="col-lg-7 solutions-content" data-aos={reverse ? 'fade-left' : 'fade-right'}>
+        <h3>{title}</h3>
+        <p class="solutions-italic-text">{intro}</p>
+        {body && <p>{body}</p>}
+        <FeatureGrid features={features} columns="col-12 col-md-6" />
+      </div>
+      <div class="col-lg-5 solutions-image" data-aos="zoom-in">
+        <img src={image} class="img-fluid" alt={imageAlt} />
+      </div>
+    </div>
+  </div>
+</section>

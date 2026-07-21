@@ -1,0 +1,43 @@
+---
+interface Props {
+  activePath?: string;
+}
+
+const { activePath = '/' } = Astro.props;
+const navItems = [
+  { href: '/', legacyHref: '/index.html', label: 'Home' },
+  { href: '/products/', legacyHref: '/products.html', label: 'Our Products' },
+  { href: '/solutions/', legacyHref: '/solutions.html', label: 'Solutions' },
+  { href: '/#enterprise-services', legacyHref: '/index.html#enterprise-services', label: 'For Enterprises' },
+  { href: '/workflow/', legacyHref: '/workflow.html', label: 'Workflow' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/contact/', legacyHref: '/contact.html', label: 'Contact Us' }
+];
+
+const normalize = (value: string) => value.split('#')[0].replace(/index\.html$/, '').replace(/\/$/, '') || '/';
+const isActive = (item: { href: string; legacyHref?: string }) => {
+  const normalizedActivePath = normalize(activePath);
+  return normalizedActivePath === normalize(item.href) || Boolean(item.legacyHref && normalizedActivePath === normalize(item.legacyHref));
+};
+---
+<header id="header" class="header d-flex align-items-center sticky-top">
+  <div class="container-fluid container-xl position-relative d-flex align-items-center">
+    <a href="/" class="logo d-flex align-items-center me-auto">
+      <img src="/assets/img/logo_Blue.png" alt="BotPlus Logo" loading="eager" fetchpriority="high" />
+      <h1 class="sitename">BotPlus</h1>
+    </a>
+
+    <nav id="navmenu" class="navmenu">
+      <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      <ul>
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} class={isActive(item) ? 'active' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

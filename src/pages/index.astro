@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import ProductCardGrid from '../components/ProductCardGrid.astro';
+import SolutionBlock from '../components/SolutionBlock.astro';
+import MediaBlock from '../components/MediaBlock.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { adaptiveFeatures, enterpriseFeatures, products, solutions } from '../data/siteContent';
+
+const quickPitch = [
+  { icon: 'bi-diagram-3', title: 'Explains Complex Plans Simply', description: '"Which plan is cheaper?" -> Plain-English comparison' },
+  { icon: 'bi-person-video3', title: 'Breathtakingly Human-Like', description: 'Photorealistic avatars - an immersive experience' },
+  { icon: 'bi-translate', title: 'Speaks 40+ Languages', description: '"Hablas espanol?" - Full multilingual support' },
+  { icon: 'bi-clock-history', title: 'Remembers Everything', description: '"Remember my last order?" -> Full context memory' },
+  { icon: 'bi-emoji-heart-eyes', title: 'Real-Time Emotion Reading', description: '"Ugh, my order is late!" -> Empathetic responses' },
+  { icon: 'bi-plug', title: 'Works with Your Tools', description: 'Seamless integration with Salesforce, WhatsApp, and more' }
+];
+---
+<BaseLayout
+  title="AI Automation & Customer Support Services UAE | BotPlus"
+  description="Boost your business with AI automation and customer support services in UAE. BotPlus delivers efficient, smart solutions for seamless operations and growth."
+  canonical="/"
+  activePath="/"
+>
+  <HeroSection
+    title="Your Digital Brand Ambassador"
+    intro="AI So Real, Customers Ask, 'Are You Human?'"
+    body="Experience the future of customer interaction with our photorealistic 3D AI avatars that understand emotions, speak 40+ languages, and resolve issues like a human."
+    cta={{ label: 'Book a Demo', calendly: true }}
+    video={{ poster: '/assets/img/intro-script.webp', webm: '/assets/video/intro-scirpt.webm', mp4: '/assets/video/intro-scirpt.mp4' }}
+  />
+
+  <section id="quick-pitch" class="quick-pitch section py-5 bg-light">
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+        {quickPitch.map((item) => (
+          <div class="col-lg-5 col-md-6">
+            <div class="d-flex align-items-start mb-3">
+              <i class={`bi ${item.icon} fs-4 me-3 color-3`}></i>
+              <div>
+                <h4 class="mb-1">{item.title}</h4>
+                <p class="text-muted mb-0"><em>{item.description}</em></p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="adaptive-customer-intelligence" class="features section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-3 section-title" data-aos="fade-right">
+          <h2>Adaptive Customer Intelligence</h2>
+          <p class="section-subtitle">Reads Minds, Hearts, and Histories.</p>
+          <p>Every customer query is analysed and fully understood before the agent formulates the answer.</p>
+        </div>
+        <div class="col-lg-9">
+          <FeatureGrid features={adaptiveFeatures} iconBox={true} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <MediaBlock
+    id="intro-video"
+    poster="/assets/img/intro_video.webp"
+    webm="/assets/video/intro_video.webm"
+    mp4="/assets/video/intro_video.mp4"
+    ratio="ratio-1x1"
+  />
+
+  <section id="enterprise-services" class="services section light-background">
+    <div class="container">
+      <SectionHeader title="Agentic AI Built for Enterprises" subtitle="BotPlus delivers secure, scalable customer experiences engineered for global businesses" />
+      <FeatureGrid features={enterpriseFeatures} columns="col-lg-4 col-md-6" />
+    </div>
+  </section>
+
+  <section id="products-preview" class="services section">
+    <div class="container">
+      <SectionHeader title="Our AI Products" subtitle="Conversational AI, photorealistic avatars, AI voice agents, retail automation, and virtual try-on experiences." />
+      <ProductCardGrid products={products.slice(0, 3)} />
+    </div>
+  </section>
+
+  <SolutionBlock {...solutions[0]} />
+
+  <MediaBlock
+    id="demo-video"
+    poster="/assets/img/botplus-demo.jpg"
+    webm="/assets/video/botplus-demo.webm"
+    mp4="/assets/video/botplus-demo.mp4"
+    ratio="ratio-1x1"
+  />
+
+  <CtaBand
+    title="Ready to Transform Your Customer Experience?"
+    body="Experience the future of customer interaction with our photorealistic AI avatars that understand emotions, speak 40+ languages, and resolve issues with human-like intuition."
+    ctaLabel="Book a Demo"
+    calendly={true}
+  />
+
+  <script slot="scripts" is:inline>
+    let calendlyLoaded = false;
+    let calendlyLoading = false;
+    function loadCalendly() {
+      if (calendlyLoaded || calendlyLoading) return Promise.resolve();
+      calendlyLoading = true;
+      return new Promise((resolve, reject) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://assets.calendly.com/assets/external/widget.css';
+        document.head.appendChild(link);
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.onload = () => { calendlyLoaded = true; calendlyLoading = false; resolve(); };
+        script.onerror = () => { calendlyLoading = false; reject(new Error('Failed to load Calendly')); };
+        document.body.appendChild(script);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const heroVideo = document.getElementById('heroVideo');
+      const unmuteBtn = document.getElementById('unmuteBtn');
+      if (heroVideo && unmuteBtn) {
+        unmuteBtn.addEventListener('click', () => {
+          heroVideo.muted = !heroVideo.muted;
+          const label = unmuteBtn.querySelector('.btn-text');
+          if (label) label.textContent = heroVideo.muted ? 'Unmute to hear your agent speak' : 'Mute video';
+          heroVideo.play().catch(() => {});
+        });
+      }
+
+      document.querySelectorAll('[data-calendly="demo"]').forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          loadCalendly().then(() => {
+            if (window.Calendly) window.Calendly.initPopupWidget({ url: 'https://calendly.com/justin-manj/demo?&hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=364f5d&back=1' });
+          });
+        });
+      });
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,29 @@
+---
+interface Props {
+  id?: string;
+  title: string;
+  body: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  calendly?: boolean;
+}
+
+const { id = 'call-to-action', title, body, ctaLabel, ctaHref = 'javascript:void(0);', calendly = false } = Astro.props;
+---
+<section id={id} class="call-to-action section bg-light">
+  <div class="container">
+    <div class="row justify-content-center" data-aos="zoom-in">
+      <div class="col-xl-10">
+        <div class="text-center">
+          <h3>{title}</h3>
+          <p class="mb-4">{body}</p>
+          {ctaLabel && (
+            <div class="text-center">
+              <a href={ctaHref} class="btn-common" data-calendly={calendly ? 'demo' : undefined}>{ctaLabel}</a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

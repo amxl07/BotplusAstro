@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import ProductCardGrid from '../components/ProductCardGrid.astro';
+import SolutionBlock from '../components/SolutionBlock.astro';
+import WorkflowGrid from '../components/WorkflowGrid.astro';
+import MediaBlock from '../components/MediaBlock.astro';
+import CtaBand from '../components/CtaBand.astro';
+import ContactForm from '../components/ContactForm.astro';
+import ContactInfo from '../components/ContactInfo.astro';
+import CalendlyEmbed from '../components/CalendlyEmbed.astro';
+import FaqSection from '../components/FaqSection.astro';
+import { adaptiveFeatures, enterpriseFeatures, faqs, products, solutions, workflowFeatures } from '../data/siteContent';
+---
+<BaseLayout
+  title="BotPlus Component Review"
+  description="Internal component review page for the BotPlus Astro migration."
+  canonical="/component-review/"
+  noindex={true}
+  bodyClass="index-page component-review"
+  showNavbar={false}
+  showFooter={false}
+>
+  <section class="section light-background">
+    <div class="container">
+      <span class="component-review-label">Component Review</span>
+      <h1>BotPlus Astro Component Review</h1>
+      <p>Internal noindex review page showing the reusable components converted from the current BotPlus static pages with real BotPlus content.</p>
+    </div>
+  </section>
+
+  <section id="review-navbar" class="section">
+    <div class="container"><span class="component-review-label">1. Navbar</span></div>
+    <Navbar activePath="/" />
+  </section>
+
+  <section id="review-hero" class="section pt-0">
+    <div class="container"><span class="component-review-label">2. HeroSection</span></div>
+    <HeroSection
+      title="Your Digital Brand Ambassador"
+      intro="AI So Real, Customers Ask, 'Are You Human?'"
+      body="Experience the future of customer interaction with our photorealistic 3D AI avatars that understand emotions, speak 40+ languages, and resolve issues like a human."
+      cta={{ label: 'Book a Demo', calendly: true }}
+      video={{ poster: '/assets/img/intro-script.webp', webm: '/assets/video/intro-scirpt.webm', mp4: '/assets/video/intro-scirpt.mp4' }}
+    />
+  </section>
+
+  <section id="review-section-header" class="services section light-background">
+    <div class="container">
+      <span class="component-review-label">3. SectionHeader</span>
+      <SectionHeader title="Agentic AI Built for Enterprises" subtitle="BotPlus delivers secure, scalable customer experiences engineered for global businesses" />
+    </div>
+  </section>
+
+  <section id="review-feature-grid" class="features section">
+    <div class="container">
+      <span class="component-review-label">4. FeatureGrid</span>
+      <div class="row align-items-center">
+        <div class="col-lg-3 section-title" data-aos="fade-right">
+          <h2>Adaptive Customer Intelligence</h2>
+          <p class="section-subtitle">Reads Minds, Hearts, and Histories.</p>
+          <p>Every customer query is analysed and fully understood before the agent formulates the answer.</p>
+        </div>
+        <div class="col-lg-9">
+          <FeatureGrid features={adaptiveFeatures} iconBox={true} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="review-products" class="services section light-background">
+    <div class="container">
+      <span class="component-review-label">5. ProductCardGrid</span>
+      <SectionHeader title="Our AI Products" />
+      <ProductCardGrid products={products} />
+    </div>
+  </section>
+
+  <div id="review-solution-block">
+    <section class="section pb-0"><div class="container"><span class="component-review-label">6. SolutionBlock</span></div></section>
+    <SolutionBlock {...solutions[0]} />
+  </div>
+
+  <div id="review-workflow-grid">
+    <section class="section pb-0"><div class="container"><span class="component-review-label">7. WorkflowGrid</span></div></section>
+    <WorkflowGrid
+      intro="Our intelligent workflow system ensures every customer interaction is handled with precision and emotional intelligence."
+      features={workflowFeatures}
+    />
+  </div>
+
+  <section id="review-media-block" class="section light-background">
+    <div class="container"><span class="component-review-label">8. MediaBlock</span></div>
+    <MediaBlock
+      id="review-demo-video"
+      poster="/assets/img/botplus-demo.jpg"
+      webm="/assets/video/botplus-demo.webm"
+      mp4="/assets/video/botplus-demo.mp4"
+      ratio="ratio-1x1"
+      caption="BotPlus demo video pattern reused from the current homepage media sections."
+    />
+  </section>
+
+  <section id="review-cta" class="section pt-0">
+    <div class="container"><span class="component-review-label">9. CtaBand</span></div>
+    <CtaBand
+      title="Ready to Transform Your Customer Experience?"
+      body="Experience the future of customer interaction with our photorealistic AI avatars that understand emotions, speak 40+ languages, and resolve issues with human-like intuition."
+      ctaLabel="Book a Demo"
+      calendly={true}
+    />
+  </section>
+
+  <section id="review-contact" class="contact section light-background">
+    <div class="container" data-aos="fade-up">
+      <span class="component-review-label">10. ContactForm and 11. ContactInfo</span>
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="row g-5">
+            <div class="col-lg-7"><ContactForm /></div>
+            <div class="col-lg-5"><ContactInfo /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="review-calendly" class="section">
+    <div class="container">
+      <span class="component-review-label">12. CalendlyEmbed</span>
+      <CalendlyEmbed thankYou={false} />
+    </div>
+  </section>
+
+  <section id="review-faq" class="section light-background pt-0">
+    <div class="container"><span class="component-review-label">13. FaqSection</span></div>
+    <FaqSection faqs={faqs} intro="Common BotPlus questions for SEO page patterns." />
+  </section>
+
+  <section id="review-footer" class="section">
+    <div class="container"><span class="component-review-label">14. Footer</span></div>
+    <Footer />
+  </section>
+
+  <script slot="scripts" is:inline>
+    let calendlyLoaded = false;
+    let calendlyLoading = false;
+    function loadCalendly() {
+      if (calendlyLoaded || calendlyLoading) return Promise.resolve();
+      calendlyLoading = true;
+      return new Promise((resolve, reject) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://assets.calendly.com/assets/external/widget.css';
+        document.head.appendChild(link);
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.onload = () => { calendlyLoaded = true; calendlyLoading = false; resolve(); };
+        script.onerror = () => { calendlyLoading = false; reject(new Error('Failed to load Calendly')); };
+        document.body.appendChild(script);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-calendly="demo"]').forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          loadCalendly().then(() => {
+            if (window.Calendly) window.Calendly.initPopupWidget({ url: 'https://calendly.com/justin-manj/demo?&hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=364f5d&back=1' });
+          });
+        });
+      });
+    });
+  </script>
+</BaseLayout>

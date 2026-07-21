@@ -1,0 +1,15 @@
+---
+interface Props {
+  label?: string;
+  title: string;
+  subtitle?: string;
+  align?: 'center' | 'start';
+}
+
+const { label, title, subtitle, align = 'center' } = Astro.props;
+---
+<div class={`section-title text-${align}`} data-aos="fade-up">
+  {label && <p class="section-subtitle">{label}</p>}
+  <h2>{title}</h2>
+  {subtitle && <p>{subtitle}</p>}
+</div>

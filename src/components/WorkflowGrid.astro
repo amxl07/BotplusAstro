@@ -1,0 +1,37 @@
+---
+import FeatureGrid from './FeatureGrid.astro';
+
+interface Feature {
+  icon?: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title?: string;
+  intro?: string;
+  image?: string;
+  imageAlt?: string;
+  features: Feature[];
+}
+
+const { title = 'Workflow Highlights', intro, image = '/assets/img/botplus-workflow.svg', imageAlt = 'BotPlus conversation workflow diagram', features } = Astro.props;
+---
+<section id="workflow" class="solutions section">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-4 solutions-content" data-aos="fade-right">
+        <div>
+          <h3>{title}</h3>
+          {intro && <p>{intro}</p>}
+        </div>
+        <div class="grid">
+          <FeatureGrid features={features} columns="col-12" />
+        </div>
+      </div>
+      <div class="col-lg-8" data-aos="zoom-in">
+        <img src={image} class="scaled-75-image" alt={imageAlt} />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1441,7 +1441,7 @@ section,
 /* Features Grid */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
   margin-top: 30px;
 }
@@ -1461,6 +1461,10 @@ section,
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
   border-left: 4px solid var(--secondary);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: normal;
 }
 
 .feature-card:hover {
@@ -1473,12 +1477,35 @@ section,
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  min-width: 0;
+  line-height: 1.35;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
 }
 
 .feature-card h4 i {
   color: var(--secondary);
   margin-right: 10px;
   font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.feature-card h4 span {
+  min-width: 0;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.feature-card p {
+  margin-bottom: 0;
+}
+
+@media (max-width: 767.98px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 

@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ProductCardGrid from '../components/ProductCardGrid.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { productDetails, products } from '../data/siteContent';
+---
+<BaseLayout
+  title="Best AI Automation Agency UAE & Saudi Arabia | Botplus"
+  description="BotPlus is the best AI automation agency in UAE & Saudi Arabia, offering smart AI solutions for retail, customer support, and business efficiency."
+  canonical="/products/"
+  activePath="/products/"
+>
+  <HeroSection
+    title="BotPlus - The Future of Customer Interaction is Here!"
+    intro="Tired of robotic chatbots, endless call center hold times, or missing sales opportunities?"
+    body="Meet BotPlus, your AI-powered brand ambassadors that deliver human-like interactions at machine speed. Whether you need cost-cutting automation or an immersive luxury experience, our AI agency offers the right product for you."
+  />
+
+  <section id="services" class="services section light-background">
+    <div class="container">
+      <SectionHeader title="Our AI Products" />
+      <ProductCardGrid products={products} />
+    </div>
+  </section>
+
+  {productDetails.map((product, index) => (
+    <section id={product.id} class={`${index === 0 ? 'products' : 'services'} section product-detail-section`}>
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-12 services-image text-center">
+            <img src={product.image} class="img-fluid scaled-image" alt={product.imageAlt} data-aos="zoom-in" />
+          </div>
+          <div class="col-12">
+            <div class="content-max-width product-detail-content">
+              <div class="product-intro">
+                <h3><i class={`bi ${product.icon} color-3`}></i> {product.title}</h3>
+                <p class="services-italic-text">{product.intro}</p>
+                <p>{product.body}</p>
+                <div class="comparison-card">
+                  <ul class="list-unstyled">
+                    {product.highlights.map((highlight) => <li><span class="tick-green">✓</span> {highlight}</li>)}
+                  </ul>
+                </div>
+              </div>
+
+              <FeatureGrid features={product.features} columns="col-md-6" />
+
+              <div class="use-cases">
+                <h4>Applications</h4>
+                <div class="row gy-4">
+                  {product.applications.map((application, applicationIndex) => (
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay={(applicationIndex + 1) * 50}>
+                      <div class="use-case-card">
+                        <h5><i class={`bi ${application.icon}`}></i> {application.title}</h5>
+                        <p>{application.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <CtaBand
+    title="Ready to Choose the Right AI Product?"
+    body="Book a demo and see how BotPlus can fit your support, sales, retail, and automation workflows."
+    ctaLabel="Book a Demo"
+    calendly={true}
+  />
+
+  <script slot="scripts" is:inline>
+    let calendlyLoaded = false;
+    let calendlyLoading = false;
+    function loadCalendly() {
+      if (calendlyLoaded || calendlyLoading) return Promise.resolve();
+      calendlyLoading = true;
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://assets.calendly.com/assets/external/widget.js';
+        script.onload = () => { calendlyLoaded = true; calendlyLoading = false; resolve(); };
+        script.onerror = () => { calendlyLoading = false; reject(new Error('Failed to load Calendly')); };
+        document.body.appendChild(script);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-calendly="demo"]').forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          loadCalendly().then(() => {
+            if (window.Calendly) window.Calendly.initPopupWidget({ url: 'https://calendly.com/justin-manj/demo?&hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=364f5d&back=1' });
+          });
+        });
+      });
+    });
+  </script>
+</BaseLayout>
