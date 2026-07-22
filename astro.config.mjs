@@ -8,8 +8,6 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [
     tailwind({ applyBaseStyles: false }),
-    sitemap({
-      filter: (page) => !page.endsWith('/component-review/')
-    })
+    sitemap()
   ]
 });
