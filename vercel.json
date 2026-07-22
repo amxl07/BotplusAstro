@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    { "source": "/products.html", "destination": "/products/", "permanent": true },
+    { "source": "/solutions.html", "destination": "/solutions/", "permanent": true },
+    { "source": "/workflow.html", "destination": "/workflow/", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact/", "permanent": true },
+    { "source": "/book-demo.html", "destination": "/book-demo/", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/blog",
