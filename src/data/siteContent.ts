@@ -225,7 +225,6 @@ export const solutions = [
     body: 'With seamless integration, the avatar becomes a natural extension of your website, providing personalized experiences based on user behavior and previous interactions.',
     image: '/assets/img/doodles/website.svg',
     imageAlt: 'Photorealistic AI avatar having natural website conversation',
-    reverse: true,
     features: [
       { icon: 'bi-chat-dots', title: 'Real-time Engagement', description: 'Instant response to visitor queries with human-like conversation flow' },
       { icon: 'bi-person-circle', title: 'Personalized Experiences', description: 'Tailor conversations based on user behavior and history' },

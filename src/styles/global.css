@@ -6,7 +6,7 @@
    card and media treatment that made the converted pages feel zoomed in. */
 section,
 .section {
-  padding-block: clamp(3.25rem, 4vw, 3.75rem);
+  padding-block: clamp(4rem, 5vw, 4.75rem);
 }
 
 .section-title {
@@ -52,7 +52,7 @@ section,
 
 .features-grid {
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .feature-card {
@@ -74,6 +74,34 @@ section,
 
 .products-features li {
   padding-block: 0.35rem;
+}
+
+.solutions.section {
+  padding-block: clamp(4.5rem, 6vw, 5.5rem);
+}
+
+.solutions .row {
+  align-items: center;
+}
+
+.solutions-content .features-grid {
+  margin-top: 2.25rem;
+}
+
+.product-detail-section {
+  padding-block: clamp(4.5rem, 6vw, 5.5rem);
+}
+
+.product-detail-content .product-intro {
+  margin-bottom: 2.5rem;
+}
+
+.product-detail-content .use-cases {
+  margin-top: 3rem;
+}
+
+.contact.section {
+  padding-block: clamp(4.5rem, 6vw, 5.5rem);
 }
 
 .video-container.ratio-1x1 {
@@ -98,7 +126,7 @@ section,
 @media (max-width: 767.98px) {
   section,
   .section {
-    padding-block: 3rem;
+    padding-block: 3.5rem;
   }
 
   .hero {
@@ -117,6 +145,12 @@ section,
   .features .icon-box,
   .services .service-item {
     padding: 1.5rem;
+  }
+
+  .solutions.section,
+  .product-detail-section,
+  .contact.section {
+    padding-block: 4rem;
   }
 
   .video-container.ratio-1x1 {
