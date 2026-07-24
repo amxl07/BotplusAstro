@@ -1,147 +1,259 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroSection from '../components/HeroSection.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import FeatureGrid from '../components/FeatureGrid.astro';
-import ProductCardGrid from '../components/ProductCardGrid.astro';
-import SolutionBlock from '../components/SolutionBlock.astro';
-import MediaBlock from '../components/MediaBlock.astro';
-import CtaBand from '../components/CtaBand.astro';
-import { adaptiveFeatures, enterpriseFeatures, products, solutions } from '../data/siteContent';
+import FaqSection from '../components/FaqSection.astro';
 
-const quickPitch = [
-  { icon: 'bi-diagram-3', title: 'Explains Complex Plans Simply', description: '"Which plan is cheaper?" -> Plain-English comparison' },
-  { icon: 'bi-person-video3', title: 'Breathtakingly Human-Like', description: 'Photorealistic avatars - an immersive experience' },
-  { icon: 'bi-translate', title: 'Speaks 40+ Languages', description: '"Hablas espanol?" - Full multilingual support' },
-  { icon: 'bi-clock-history', title: 'Remembers Everything', description: '"Remember my last order?" -> Full context memory' },
-  { icon: 'bi-emoji-heart-eyes', title: 'Real-Time Emotion Reading', description: '"Ugh, my order is late!" -> Empathetic responses' },
-  { icon: 'bi-plug', title: 'Works with Your Tools', description: 'Seamless integration with Salesforce, WhatsApp, and more' }
+const fitStrip = ['Service centers', 'Hotels', 'Venues', 'Events', 'Showrooms'];
+
+const journeySteps = [
+  {
+    title: 'Approved answers',
+    body: 'Publish controlled service content, FAQs, eligibility notes, document checklists, and next-step guidance.'
+  },
+  {
+    title: 'Multi-channel interface',
+    body: 'Deploy the same journey through kiosk, avatar, web, or WhatsApp where the channel fits the visitor moment.'
+  },
+  {
+    title: 'Routing and handoff',
+    body: 'Guide visitors to the right queue, desk, staff member, form, or follow-up path with clear fallback rules.'
+  },
+  {
+    title: 'Analytics loop',
+    body: 'Review interactions, unsupported questions, completed routes, and handoff patterns to improve the service journey.'
+  }
+];
+
+const routes = [
+  {
+    title: 'Interactive kiosk solutions',
+    body: 'Start here for AI-guided kiosk software across service locations, hospitality, venues, events, and showrooms.',
+    href: '/contact/?source=homepage&interest=interactive-kiosk-solutions-uae',
+    cta: 'Discuss the gateway'
+  },
+  {
+    title: 'Self-service kiosk',
+    body: 'For branch and service-center journeys that answer approved questions, prepare visitors, and route the next step.',
+    href: '/contact/?source=homepage&interest=self-service-kiosk-uae',
+    cta: 'Discuss self-service'
+  },
+  {
+    title: 'AI kiosk',
+    body: 'For governed AI guidance, multilingual follow-up questions, optional avatar interface, and staff escalation.',
+    href: '/contact/?source=homepage&interest=ai-kiosk-uae',
+    cta: 'Discuss AI kiosk use cases'
+  },
+  {
+    title: 'Queue kiosk',
+    body: 'For Dubai and GCC service locations that need visitor intake, document readiness, and queue routing before the counter.',
+    href: '/contact/?source=homepage&interest=queue-management-kiosk-dubai',
+    cta: 'Discuss queue routing'
+  }
+];
+
+const governance = [
+  'Approved content and version control before public answers change.',
+  'Scoped data capture so journeys ask only for what the next step requires.',
+  'Staff handoff with context when the visitor needs review, exception handling, or a regulated decision.',
+  'Fallback paths for unsupported questions, unavailable systems, and non-kiosk preferences.'
+];
+
+const faqs = [
+  {
+    question: 'Is BotPlus a chatbot or a kiosk product?',
+    answer: 'BotPlus is a governed service journey product. It can appear as a kiosk, avatar, web assistant, or WhatsApp flow, but the core value is approved guidance, routing, handoff, and analytics.'
+  },
+  {
+    question: 'Does BotPlus replace front-desk staff?',
+    answer: 'No. BotPlus handles approved first-step guidance and routing, then hands off to staff when a visitor needs judgment, exception handling, or a controlled service decision.'
+  },
+  {
+    question: 'Is the avatar required?',
+    answer: 'No. The avatar is useful for premium or high-touch locations, but BotPlus can run as a kiosk, web, or WhatsApp journey without an avatar interface.'
+  },
+  {
+    question: 'How is BotPlus different from digital signage?',
+    answer: 'Digital signage broadcasts information. BotPlus lets visitors select a need, ask approved questions, receive next-step guidance, and route to staff or systems where configured.'
+  },
+  {
+    question: 'Where do ResolveDesk and Entellex fit?',
+    answer: 'BotPlus focuses on visitor-facing service journeys. ResolveDesk and Entellex can support broader service operations or enterprise automation where those product boundaries are useful.'
+  }
+];
+
+const description = 'BotPlus helps GCC service locations deploy governed AI kiosk, web, WhatsApp, routing, staff handoff, fallback, and analytics journeys.';
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'BotPlus',
+    url: 'https://www.botplus.ae/',
+    logo: 'https://www.botplus.ae/assets/img/logo_Blue.png',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+971501503004',
+      contactType: 'sales',
+      areaServed: ['AE', 'GCC'],
+      availableLanguage: ['English', 'Arabic']
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'BotPlus',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web, kiosk, WhatsApp',
+    description,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'AED',
+      availability: 'https://schema.org/InStock'
+    }
+  }
 ];
 ---
 <BaseLayout
-  title="AI Automation & Customer Support Services UAE | BotPlus"
-  description="Boost your business with AI automation and customer support services in UAE. BotPlus delivers efficient, smart solutions for seamless operations and growth."
+  title="AI Kiosk and Interactive Service Journeys UAE | BotPlus"
+  description={description}
   canonical="/"
   activePath="/"
+  jsonLd={jsonLd}
 >
-  <HeroSection
-    title="Your Digital Brand Ambassador"
-    intro="AI So Real, Customers Ask, 'Are You Human?'"
-    body="Experience the future of customer interaction with our photorealistic 3D AI avatars that understand emotions, speak 40+ languages, and resolve issues like a human."
-    cta={{ label: 'Book a Demo', calendly: true }}
-    video={{ poster: '/assets/img/intro-script.webp', webm: '/assets/video/intro-scirpt.webm', mp4: '/assets/video/intro-scirpt.mp4' }}
-  />
-
-  <section id="quick-pitch" class="quick-pitch section py-5 bg-light">
+  <section id="hero" class="hero section kiosk-home-hero">
+    <img src="/assets/img/logo tran.svg" alt="" loading="eager" fetchpriority="high" data-aos="fade-in" />
     <div class="container">
-      <div class="row g-4 justify-content-center">
-        {quickPitch.map((item) => (
-          <div class="col-lg-5 col-md-6">
-            <div class="d-flex align-items-start mb-3">
-              <i class={`bi ${item.icon} fs-4 me-3 color-3`}></i>
-              <div>
-                <h4 class="mb-1">{item.title}</h4>
-                <p class="text-muted mb-0"><em>{item.description}</em></p>
-              </div>
-            </div>
+      <div class="row align-items-center g-5" data-aos="fade-up">
+        <div class="col-lg-7">
+          <p class="section-subtitle">BotPlus for GCC service locations</p>
+          <h1>AI kiosk and service journeys for high-touch locations.</h1>
+          <p class="kiosk-home-lead">BotPlus helps visitors get the right approved answer, route, handoff, or follow-up through kiosk, avatar, web, and WhatsApp journeys that your team can govern.</p>
+          <div class="kiosk-home-actions">
+            <a href="/book-demo/?source=homepage&interest=ai-kiosk-journey-review" class="btn-common">Book an AI kiosk journey review</a>
+            <a href="/contact/?source=homepage&interest=interactive-kiosk-solutions-uae" class="btn-common kiosk-home-secondary">Explore interactive kiosk solutions</a>
           </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="kiosk-home-panel" aria-label="BotPlus journey model">
+            <span>Visitor question</span>
+            <strong>Approved guidance</strong>
+            <span>Route, queue, form, or staff handoff</span>
+            <strong>Analytics and content review</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fit" class="kiosk-fit-strip light-background">
+    <div class="container">
+      <div class="kiosk-fit-grid" aria-label="BotPlus location fit">
+        {fitStrip.map((item) => <span>{item}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <section id="problem" class="section kiosk-home-problem">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5 section-title text-start" data-aos="fade-right">
+          <p class="section-subtitle">Peak-moment friction</p>
+          <h2>Static kiosks, front desks, and information desks break down when visitors need the next step.</h2>
+        </div>
+        <div class="col-lg-7" data-aos="fade-left">
+          <p>During busy periods, visitors do not only need a screen. They need to know which service applies, what documents are required, which queue or desk is right, and when a staff member should take over.</p>
+          <p class="mb-0">BotPlus turns those moments into governed journeys: approved answers first, scoped data capture only where needed, controlled routing, staff handoff, fallback, and analytics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey-model" class="section light-background">
+    <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <p class="section-subtitle">How the journey works</p>
+        <h2>One controlled service layer across kiosk, avatar, web, and WhatsApp.</h2>
+      </div>
+      <div class="kiosk-steps" data-aos="fade-up" data-aos-delay="100">
+        {journeySteps.map((step, index) => (
+          <article class="kiosk-step">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </div>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section id="adaptive-customer-intelligence" class="features section">
+  <section id="routing" class="services section">
     <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-3 section-title" data-aos="fade-right">
-          <h2>Adaptive Customer Intelligence</h2>
-          <p class="section-subtitle">Reads Minds, Hearts, and Histories.</p>
-          <p>Every customer query is analysed and fully understood before the agent formulates the answer.</p>
+      <div class="section-title" data-aos="fade-up">
+        <p class="section-subtitle">Choose the right commercial path</p>
+        <h2>Route from the homepage to the page that matches the buyer job.</h2>
+      </div>
+      <div class="row gy-4">
+        {routes.map((route) => (
+          <div class="col-lg-6" data-aos="fade-up">
+            <article class="service-item kiosk-route-card h-100">
+              <h3>{route.title}</h3>
+              <p>{route.body}</p>
+              <a href={route.href} class="read-more stretched-link"><span>{route.cta}</span> <i class="bi bi-arrow-right"></i></a>
+            </article>
+          </div>
+        ))}
+      </div>
+      <div class="kiosk-teaser-links" data-aos="fade-up">
+        <span>Also useful for visitor management, wayfinding, hotel check-in, and event registration journeys. Dedicated solution pages can be added in the next page batch.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="control-statement" class="section kiosk-statement">
+    <div class="container" data-aos="zoom-in">
+      <p>The value is not that an avatar looks human.</p>
+      <h2>The value is that visitors finish the next step with control.</h2>
+    </div>
+  </section>
+
+  <section id="governance" class="features section">
+    <div class="container">
+      <div class="row g-5 align-items-start">
+        <div class="col-lg-4 section-title text-start" data-aos="fade-right">
+          <p class="section-subtitle">Governance and trust</p>
+          <h2>Designed for service teams that need control, not unsupported autonomy.</h2>
         </div>
-        <div class="col-lg-9">
-          <FeatureGrid features={adaptiveFeatures} iconBox={true} />
+        <div class="col-lg-8" data-aos="fade-left">
+          <div class="kiosk-governance-list">
+            {governance.map((item) => (
+              <div class="kiosk-governance-item">
+                <i class="bi bi-check2-circle"></i>
+                <p>{item}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <MediaBlock
-    id="intro-video"
-    poster="/assets/img/intro_video.webp"
-    webm="/assets/video/intro_video.webm"
-    mp4="/assets/video/intro_video.mp4"
-    ratio="ratio-1x1"
-  />
-
-  <section id="enterprise-services" class="services section light-background">
+  <section id="journey-review" class="call-to-action section bg-light">
     <div class="container">
-      <SectionHeader title="Agentic AI Built for Enterprises" subtitle="BotPlus delivers secure, scalable customer experiences engineered for global businesses" />
-      <FeatureGrid features={enterpriseFeatures} columns="col-lg-4 col-md-6" />
+      <div class="row justify-content-center" data-aos="zoom-in">
+        <div class="col-xl-10 text-center">
+          <h3>Map the first journey before you buy a kiosk.</h3>
+          <p class="mb-4">Review your visitor questions, approved content, routing rules, handoff points, and pilot scope with BotPlus.</p>
+          <a href="/book-demo/?source=homepage&interest=ai-kiosk-journey-review" class="btn-common">Book an AI kiosk journey review</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="products-preview" class="services section">
-    <div class="container">
-      <SectionHeader title="Our AI Products" subtitle="Conversational AI, photorealistic avatars, AI voice agents, retail automation, and virtual try-on experiences." />
-      <ProductCardGrid products={products.slice(0, 3)} />
-    </div>
-  </section>
-
-  <SolutionBlock {...solutions[0]} />
-
-  <MediaBlock
-    id="demo-video"
-    poster="/assets/img/botplus-demo.jpg"
-    webm="/assets/video/botplus-demo.webm"
-    mp4="/assets/video/botplus-demo.mp4"
-    ratio="ratio-1x1"
+  <FaqSection
+    title="Product Boundaries"
+    intro="Clear boundaries keep the journey safe, useful, and easy for operations teams to approve."
+    faqs={faqs}
+    schema={true}
   />
-
-  <CtaBand
-    title="Ready to Transform Your Customer Experience?"
-    body="Experience the future of customer interaction with our photorealistic AI avatars that understand emotions, speak 40+ languages, and resolve issues with human-like intuition."
-    ctaLabel="Book a Demo"
-    calendly={true}
-  />
-
-  <script slot="scripts" is:inline>
-    let calendlyLoaded = false;
-    let calendlyLoading = false;
-    function loadCalendly() {
-      if (calendlyLoaded || calendlyLoading) return Promise.resolve();
-      calendlyLoading = true;
-      return new Promise((resolve, reject) => {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://assets.calendly.com/assets/external/widget.css';
-        document.head.appendChild(link);
-        const script = document.createElement('script');
-        script.src = 'https://assets.calendly.com/assets/external/widget.js';
-        script.onload = () => { calendlyLoaded = true; calendlyLoading = false; resolve(); };
-        script.onerror = () => { calendlyLoading = false; reject(new Error('Failed to load Calendly')); };
-        document.body.appendChild(script);
-      });
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const heroVideo = document.getElementById('heroVideo');
-      const unmuteBtn = document.getElementById('unmuteBtn');
-      if (heroVideo && unmuteBtn) {
-        unmuteBtn.addEventListener('click', () => {
-          heroVideo.muted = !heroVideo.muted;
-          const label = unmuteBtn.querySelector('.btn-text');
-          if (label) label.textContent = heroVideo.muted ? 'Unmute to hear your agent speak' : 'Mute video';
-          heroVideo.play().catch(() => {});
-        });
-      }
-
-      document.querySelectorAll('[data-calendly="demo"]').forEach((button) => {
-        button.addEventListener('click', (event) => {
-          event.preventDefault();
-          loadCalendly().then(() => {
-            if (window.Calendly) window.Calendly.initPopupWidget({ url: 'https://calendly.com/justin-manj/demo?&hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=364f5d&back=1' });
-          });
-        });
-      });
-    });
-  </script>
 </BaseLayout>

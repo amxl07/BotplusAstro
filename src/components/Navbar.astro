@@ -6,12 +6,9 @@ interface Props {
 const { activePath = '/' } = Astro.props;
 const navItems = [
   { href: '/', legacyHref: '/index.html', label: 'Home' },
-  { href: '/products/', legacyHref: '/products.html', label: 'Our Products' },
-  { href: '/solutions/', legacyHref: '/solutions.html', label: 'Solutions' },
-  { href: '/#enterprise-services', legacyHref: '/index.html#enterprise-services', label: 'For Enterprises' },
-  { href: '/workflow/', legacyHref: '/workflow.html', label: 'Workflow' },
-  { href: '/blog/', label: 'Blog' },
-  { href: '/contact/', legacyHref: '/contact.html', label: 'Contact Us' }
+  { href: '/#routing', label: 'Kiosk Journeys' },
+  { href: '/book-demo/?source=nav&interest=ai-kiosk-journey-review', label: 'Journey Review' },
+  { href: '/contact/', legacyHref: '/contact.html', label: 'Contact' }
 ];
 
 const normalize = (value: string) => value.split('#')[0].replace(/index\.html$/, '').replace(/\/$/, '') || '/';

@@ -123,6 +123,179 @@ section,
   max-width: 660px;
 }
 
+/* BotPlus kiosk page patterns */
+.kiosk-home-hero {
+  min-height: 0;
+  padding-block: clamp(5rem, 8vw, 7rem);
+}
+
+.kiosk-home-lead {
+  max-width: 700px;
+}
+
+.kiosk-home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 1.75rem;
+}
+
+.kiosk-home-secondary {
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.kiosk-home-secondary:hover {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+.kiosk-home-panel {
+  display: grid;
+  gap: 0.85rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
+  border-radius: 24px;
+  background: var(--surface-color);
+  box-shadow: 0 18px 50px color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.kiosk-home-panel span,
+.kiosk-home-panel strong {
+  display: block;
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+}
+
+.kiosk-home-panel span {
+  background: color-mix(in srgb, var(--accent-color), transparent 92%);
+}
+
+.kiosk-home-panel strong {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  font-weight: 600;
+}
+
+.kiosk-fit-strip {
+  padding-block: 1.25rem;
+}
+
+.kiosk-fit-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.kiosk-fit-grid span {
+  padding: 0.65rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent-color), transparent 78%);
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--default-color), transparent 15%);
+  background: var(--surface-color);
+  font-weight: 600;
+}
+
+.kiosk-home-problem p {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.kiosk-steps {
+  display: grid;
+  gap: 1rem;
+}
+
+.kiosk-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.35rem;
+  border-radius: 20px;
+  background: var(--surface-color);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.kiosk-step span {
+  font-family: var(--heading-font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.kiosk-step h3,
+.kiosk-route-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.45rem;
+}
+
+.kiosk-step p,
+.kiosk-route-card p,
+.kiosk-governance-item p {
+  margin-bottom: 0;
+}
+
+.kiosk-route-card {
+  text-align: left;
+}
+
+.kiosk-route-card .read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  font-weight: 600;
+}
+
+.kiosk-teaser-links {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border-left: 4px solid var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 94%);
+}
+
+.kiosk-statement {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  text-align: center;
+}
+
+.kiosk-statement p {
+  margin-bottom: 0.75rem;
+  color: color-mix(in srgb, var(--contrast-color), transparent 18%);
+  font-weight: 600;
+}
+
+.kiosk-statement h2 {
+  max-width: 820px;
+  margin-inline: auto;
+  color: var(--contrast-color);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+}
+
+.kiosk-governance-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.kiosk-governance-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+  padding: 1rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+}
+
+.kiosk-governance-item i {
+  color: var(--accent-color);
+  font-size: 1.25rem;
+}
+
 @media (max-width: 767.98px) {
   section,
   .section {
@@ -140,6 +313,19 @@ section,
 
   .hero p {
     font-size: 1rem;
+  }
+
+  .kiosk-home-actions,
+  .kiosk-home-actions .btn-common {
+    width: 100%;
+  }
+
+  .kiosk-home-actions .btn-common {
+    text-align: center;
+  }
+
+  .kiosk-step {
+    grid-template-columns: 1fr;
   }
 
   .features .icon-box,
